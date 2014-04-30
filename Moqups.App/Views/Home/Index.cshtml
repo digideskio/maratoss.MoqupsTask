@@ -1,6 +1,82 @@
-﻿@{
+﻿@using Moqups.Entities
+@model IList<Moqups.Entities.User>
+
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+@section head
+{
+    <link href="/Content/themes/base/jquery-ui.css" rel="stylesheet">
+    <script src="/Scripts/jquery-ui-1.8.24.min.js"></script>
+
+    <!-- Pick a theme, load the plugin & initialize plugin -->
+    <link href="/Content/themes/sorter/theme.default.css" rel="stylesheet">
+    <script src="/Scripts/jquery.tablesorter.min.js"></script>
+    <script src="/Scripts/jquery.tablesorter.widgets.min.js"></script>
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function() {
+            $('table').tablesorter({
+                widgets: ['zebra', 'columns'],
+                usNumberFormat: false,
+                sortReset: true,
+                sortRestart: true
+            });
+
+            $("#dialog-message").hide();
+        });
+
+        function openWindow() {
+            $("#dialog-message").dialog({
+                modal: true,
+                buttons: {
+                    Ok: function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        }
+    </script>
+}
+
+<input type="button" value="Add" onclick="openWindow()" />
+
+<div id="dialog-message" title="Download complete">
+    <p>
+        <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
+        Your files have downloaded successfully into the My Downloads folder.
+    </p>
+    <p>
+        Currently using <b>36% of your storage space</b>.
+    </p>
+</div>
+
+<table class="tablesorter" id="myTable">
+    <thead>
+        <tr>
+            <td>Firstname</td>
+            <td>Lastname</td>
+            <td>Status</td>
+            <td>Pages</td>
+            <td>Admin</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (User user in @Model)
+        {
+            <tr>
+                <td>@user.Firstname</td>
+                <td>@user.Lastname</td>
+                <td>@user.Status</td>
+                <td>@(user.Pages.Aggregate(string.Empty, (accString, p2) => accString + "/" + p2.Name))</td>
+                <td>
+                    <input type="checkbox" checked="@user.IsAdmin" disabled="disabled"/></td>
+            </tr>
+        }
+    </tbody>
+</table>
