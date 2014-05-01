@@ -45,5 +45,12 @@ namespace Moqups.App.Controllers
             User user = _userService.SaveOrUpdate(editUserModel.User);
             return RedirectToAction("Index");
         }
+
+        public ActionResult DeleteEntity(long id)
+        {
+            _userService.Delete(id);
+            
+            return RedirectToAction("Index");
+        }
     }
 }

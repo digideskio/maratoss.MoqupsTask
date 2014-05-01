@@ -40,11 +40,14 @@ namespace Moqups.BL
                 // todo: update entity
                 return user;
             }
-            else
-            {
-                return new User(777);
-                // todo: create entity
-            }
+
+            // todo: create entity
+            return new User(777);
+        }
+
+        public void Delete(long id)
+        {
+            //todo: deleting entity with id
         }
     }
 }
