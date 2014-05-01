@@ -1,5 +1,4 @@
-﻿@using Page = Moqups.Entities.Page
-@model Moqups.App.Models.EditUserModel
+﻿@model Moqups.App.Models.EditUserModel
 
 <style type="text/css">
     select.listbox {
@@ -19,6 +18,7 @@
 
 @using (Html.BeginForm("SaveOrUpdate", "Home", FormMethod.Post))
 {
+    @Html.HiddenFor(x => x.User.Id)
     <table width="100%">
         <tr>
             <td>Firstname</td>
@@ -44,7 +44,7 @@
             <td>@Html.ListBoxFor(x => x.User.Pages, new MultiSelectList(@Model.User.Pages, "Id", "Name"), new { size = 4, id = "sortable2", @class = "listbox" })</td>
             <td>
                 <select id="sortable1" multiple="multiple" size="4" class="listbox">
-                    @foreach (Page page in @Model.AvailablePages)
+                    @foreach (Moqups.Entities.Page page in @Model.AvailablePages)
                     {
                         <option value="@page.Id">@page.Name</option>
                     }
@@ -52,4 +52,8 @@
             </td>
         </tr>
     </table>
+    
+    <input type="submit" value="Save" />
+    <input type="button" value="Cancel" />
+    <input type="button" value="Delete" />
 }

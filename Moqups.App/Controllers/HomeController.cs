@@ -40,9 +40,10 @@ namespace Moqups.App.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveOrUpdate()
+        public ActionResult SaveOrUpdate(EditUserModel editUserModel)
         {
-            throw new System.NotImplementedException();
+            User user = _userService.SaveOrUpdate(editUserModel.User);
+            return RedirectToAction("Index");
         }
     }
 }

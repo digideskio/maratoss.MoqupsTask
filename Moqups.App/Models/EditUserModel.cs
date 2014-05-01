@@ -8,6 +8,10 @@ namespace Moqups.App.Models
 {
     public class EditUserModel
     {
+        public EditUserModel()
+        {
+            
+        }
         public EditUserModel(User user, IList<Page> availablePages)
         {
             User = user;
@@ -23,8 +27,8 @@ namespace Moqups.App.Models
                         });
         }
 
-        public User User { get; private set; }
+        public User User { get; set; }
         public IList<Page> AvailablePages { get; set; }
-        public IEnumerable<SelectListItem> StatusList { get; private set; }
+        public IEnumerable<SelectListItem> StatusList { get; set; }
     }
 }

@@ -11,12 +11,17 @@ namespace Moqups.Entities
 
     public class User : IEntity<long>
     {
+        public User(long id)
+            : this()
+        {
+            Id = id;
+        }
         public User()
         {
             Pages = new List<Page>();
         }
 
-        public long Id { get; private set; }
+        public long Id { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public Status Status { get; set; }

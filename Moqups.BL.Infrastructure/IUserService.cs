@@ -8,5 +8,6 @@ namespace Moqups.BL.Infrastructure
         IList<User> GetUsers();
         IList<Page> GetAvailablePages();
         User GetUserById(long id);
+        User SaveOrUpdate(User user);
     }
 }

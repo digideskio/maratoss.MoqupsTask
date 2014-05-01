@@ -46,16 +46,20 @@
                         width: 350
                     });
 
-                    var buttons = [{ text: "Save", click: function() { $(this).dialog("close"); } },
+                    var buttons = [{ text: "Save", click: saveEntity() },
                         { text: "Cancel", click: function() { $(this).dialog("close"); } }];
 
                     if (isEdit) {
                         buttons.push({ text: "Delete", click: function() { $(this).dialog("close"); } });
                     }
 
-                    dialogMessage.dialog("option", "buttons", buttons);
+                    //dialogMessage.dialog("option", "buttons", buttons);
                 }
             });
+        }
+        
+        function saveEntity() {
+            $('#dialog-message').first('[form]').submit();
         }
     </script>
 }

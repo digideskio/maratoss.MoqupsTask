@@ -32,5 +32,19 @@ namespace Moqups.BL
                 .With(x => x.Id, id)
                 .Build();
         }
+
+        public User SaveOrUpdate(User user)
+        {
+            if (user.Id > 0)
+            {
+                // todo: update entity
+                return user;
+            }
+            else
+            {
+                return new User(777);
+                // todo: create entity
+            }
+        }
     }
 }
