@@ -1,0 +1,8 @@
+﻿@model Moqups.App.Models.EditUserModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("AddOrEditUserForm", @Model)

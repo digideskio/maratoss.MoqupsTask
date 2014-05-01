@@ -20,5 +20,17 @@ namespace Moqups.BL
                 .With(x => x.Pages, Builder<Page>.CreateListOfSize(1).Build())
                 .Build();
         }
+
+        public IList<Page> GetAvailablePages()
+        {
+            return Builder<Page>.CreateListOfSize(3).Build();
+        }
+
+        public User GetUserById(long id)
+        {
+            return Builder<User>.CreateNew()
+                .With(x => x.Id, id)
+                .Build();
+        }
     }
 }

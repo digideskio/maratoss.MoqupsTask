@@ -20,7 +20,7 @@
 @section scripts
 {
     <script type="text/javascript">
-        $(function() {
+        $(function () {
             $('table').tablesorter({
                 widgets: ['zebra', 'columns'],
                 usNumberFormat: false,
@@ -31,29 +31,38 @@
             $("#dialog-message").hide();
         });
 
-        function openWindow() {
-            $("#dialog-message").dialog({
-                modal: true,
-                buttons: {
-                    Ok: function() {
-                        $(this).dialog("close");
+        function openWindow(isEdit, userId) {
+            var titleWindow = isEdit ? "Edit user" : "Add user";
+            var dialogMessage = $("#dialog-message");
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("DetailsUser", "Home")',
+                data: ({ id: userId }),
+                success: function (data) {
+                    dialogMessage.html(data);
+                    dialogMessage.dialog({
+                        modal: true,
+                        title: titleWindow,
+                        width: 350
+                    });
+
+                    var buttons = [{ text: "Save", click: function() { $(this).dialog("close"); } },
+                        { text: "Cancel", click: function() { $(this).dialog("close"); } }];
+
+                    if (isEdit) {
+                        buttons.push({ text: "Delete", click: function() { $(this).dialog("close"); } });
                     }
+
+                    dialogMessage.dialog("option", "buttons", buttons);
                 }
             });
         }
     </script>
 }
 
-<input type="button" value="Add" onclick="openWindow()" />
+<input type="button" value="Add" onclick="openWindow(false, 0)" />
 
-<div id="dialog-message" title="Download complete">
-    <p>
-        <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
-        Your files have downloaded successfully into the My Downloads folder.
-    </p>
-    <p>
-        Currently using <b>36% of your storage space</b>.
-    </p>
+<div id="dialog-message" title="Edit user">
 </div>
 
 <table class="tablesorter" id="myTable">
@@ -69,13 +78,12 @@
     <tbody>
         @foreach (User user in @Model)
         {
-            <tr>
+            <tr ondblclick="openWindow(true, @user.Id)">
                 <td>@user.Firstname</td>
                 <td>@user.Lastname</td>
                 <td>@user.Status</td>
                 <td>@(user.Pages.Aggregate(string.Empty, (accString, p2) => accString + "/" + p2.Name))</td>
-                <td>
-                    <input type="checkbox" checked="@user.IsAdmin" disabled="disabled"/></td>
+                <td><input type="checkbox" checked="@user.IsAdmin" disabled="disabled"/></td>
             </tr>
         }
     </tbody>

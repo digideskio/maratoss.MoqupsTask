@@ -1,0 +1,55 @@
+﻿@using Page = Moqups.Entities.Page
+@model Moqups.App.Models.EditUserModel
+
+<style type="text/css">
+    select.listbox {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+    }
+</style>
+
+<script>
+    $(function () {
+        $("#sortable1, #sortable2").sortable({
+            connectWith: ".connectedSortable"
+        }).disableSelection();
+    });
+</script>
+
+@using (Html.BeginForm("SaveOrUpdate", "Home", FormMethod.Post))
+{
+    <table width="100%">
+        <tr>
+            <td>Firstname</td>
+            <td>@Html.TextBoxFor(x => x.User.Firstname)</td>
+        </tr>
+        <tr>
+            <td>Lastname</td>
+            <td>@Html.TextBoxFor(x => x.User.Lastname)</td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>@Html.DropDownListFor(x => x.User.Status, @Model.StatusList)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>@Html.CheckBoxFor(x => x.User.IsAdmin)Admin</td>
+        </tr>
+        <tr>
+            <td>User's pages</td>
+            <td>Available pages</td>
+        </tr>
+        <tr>
+            <td>@Html.ListBoxFor(x => x.User.Pages, new MultiSelectList(@Model.User.Pages, "Id", "Name"), new { size = 4, id = "sortable2", @class = "listbox" })</td>
+            <td>
+                <select id="sortable1" multiple="multiple" size="4" class="listbox">
+                    @foreach (Page page in @Model.AvailablePages)
+                    {
+                        <option value="@page.Id">@page.Name</option>
+                    }
+                </select>
+            </td>
+        </tr>
+    </table>
+}

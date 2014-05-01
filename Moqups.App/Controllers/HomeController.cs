@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Web.Mvc;
+using Moqups.App.Models;
 using Moqups.BL.Infrastructure;
 using Moqups.Entities;
 
@@ -23,10 +25,24 @@ namespace Moqups.App.Controllers
             return View(users);
         }
 
-        [HttpPost]
-        public ActionResult SaveOrUpdate(User user)
+        public ActionResult DetailsUser(long id)
         {
-            
+            User user = id == 0 ? new User() : _userService.GetUserById(id);
+            IList<Page> availablePages = _userService.GetAvailablePages();
+
+            var model = new EditUserModel(user, availablePages.Except(user.Pages).ToList());
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("AddOrEditUserForm", model);
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult SaveOrUpdate()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
