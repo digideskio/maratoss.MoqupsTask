@@ -26,7 +26,7 @@
     <table width="100%">
         <tr>
             <td>Firstname</td>
-            <td>Html.TextBoxFor(x => x.User.Firstname)</td>
+            <td>@Html.TextBoxFor(x => x.User.Firstname)</td>
         </tr>
         <tr>
             <td>Lastname</td>
@@ -45,7 +45,7 @@
             <td>Available pages</td>
         </tr>
         <tr>
-            <td>Html.ListBoxFor(x => x.User.Pages, new MultiSelectList(@Model.User.Pages, "Id", "Name"), new { size = 4, id = "sortable2", @class = "listbox" })</td>
+            <td>@Html.ListBoxFor(x => x.User.Pages, new MultiSelectList(@Model.User.Pages, "Id", "Name"), new { size = 4, id = "sortable2", @class = "listbox" })</td>
             <td>
                 <select id="sortable1" multiple="multiple" size="4" class="listbox">
                     @foreach (Moqups.Entities.Page page in @Model.AvailablePages)
@@ -61,6 +61,6 @@
     <input type="button" value="Cancel" />
     if(Model.User.Id > 0)
     {
-         <input type="button" value="Delete" onclick="deleteEntity(Model.User.Id)" />
+         <input type="button" value="Delete" onclick="deleteEntity(@Model.User.Id)" />
     }
 }

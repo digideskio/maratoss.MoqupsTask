@@ -30,6 +30,7 @@ namespace Moqups.BL
         {
             return Builder<User>.CreateNew()
                 .With(x => x.Id, id)
+                .With(x => x.Pages, Builder<Page>.CreateListOfSize(2).Build())
                 .Build();
         }
 
