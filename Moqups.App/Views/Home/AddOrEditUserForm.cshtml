@@ -96,7 +96,7 @@
     
     <div id="buttons">
         <input type="button" value="Save" onclick="submitForm()" />
-        <input type="button" value="Cancel" id="cancelButton" onclick="" />
+        <input type="button" value="Cancel" id="cancelButton" onclick="window.history.back()" />
         @if(Model.User.Id > 0)
         {
              <input type="button" value="Delete" onclick="deleteEntity(@Model.User.Id)" />
