@@ -9,7 +9,7 @@
 @section head
 {
     <link href="/Content/themes/base/jquery-ui.css" rel="stylesheet">
-    <script src="/Scripts/jquery-ui-1.8.24.min.js"></script>
+    <script src="/Scripts/jquery-ui-1.10.4.min.js"></script>
 
     <!-- Pick a theme, load the plugin & initialize plugin -->
     <link href="/Content/themes/sorter/theme.default.css" rel="stylesheet">
@@ -28,9 +28,7 @@
                 sortRestart: true
             });
 
-            $("#firstname").tooltip();
-
-            $("#dialog-message").hide();
+            //$("#dialog-message").dialog("close");
         });
 
         function openWindow(isEdit, userId) {
@@ -51,12 +49,16 @@
                         width: 350
                     });
 
-                    var buttons = [{ text: "Save", click: saveEntity() },
-                        { text: "Cancel", click: function() { $(this).dialog("close"); } }];
-
-                    if (isEdit) {
-                        buttons.push({ text: "Delete", click: function() { $(this).dialog("close"); } });
-                    }
+                    var cancelButton = $("#dialog-message").find("#cancelButton");
+                    cancelButton.on("click", function() {
+                        dialogMessage.dialog("close");
+                    });
+//                    var buttons = [{ text: "Save", click: saveEntity() },
+//                        { text: "Cancel", click: function() { $(this).dialog("close"); } }];
+//
+//                    if (isEdit) {
+//                        buttons.push({ text: "Delete", click: function() { $(this).dialog("close"); } });
+//                    }
 
                     //dialogMessage.dialog("option", "buttons", buttons);
                 }
@@ -66,8 +68,6 @@
 }
 
 <input type="button" value="Add" onclick="openWindow(false, 0)" />
-
-<input type="text" title="asdasdasdasdasdasd" id="firstname"/>
 
 <div id="dialog-message">
 </div>

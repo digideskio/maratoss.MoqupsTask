@@ -30,6 +30,8 @@
                 $(this).append(ui.draggable);
             }
         });
+
+        $('[title]').tooltip();
     });
     
     function deleteEntity(idEntity) {
@@ -92,10 +94,12 @@
         </tr>
     </table>
     
-    <input type="button" value="Save" onclick="submitForm()" />
-    <input type="button" value="Cancel" />
-    if(Model.User.Id > 0)
-    {
-         <input type="button" value="Delete" onclick="deleteEntity(@Model.User.Id)" />
-    }
+    <div id="buttons">
+        <input type="button" value="Save" onclick="submitForm()" />
+        <input type="button" value="Cancel" id="cancelButton" onclick="" />
+        @if(Model.User.Id > 0)
+        {
+             <input type="button" value="Delete" onclick="deleteEntity(@Model.User.Id)" />
+        }
+    </div>
 }
