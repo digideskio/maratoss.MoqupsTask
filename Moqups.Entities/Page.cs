@@ -4,14 +4,13 @@
     {
         public Page()
         {
-            
         }
         public Page(long id)
         {
             Id = id;
         }
 
-        public long Id { get; private set; }
+        public long Id { get; set; }
         public string Name { get; set; }
 
         // override object.Equals

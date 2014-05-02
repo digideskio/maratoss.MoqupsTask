@@ -42,21 +42,21 @@ namespace Moqups.App.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveOrUpdate(EditUserModel editUserModel, FormCollection collection)
+        public ActionResult SaveOrUpdate(EditUserModel editUserModel)
         {
-            if (collection.HasKeys() &&
-                collection.AllKeys.Any(key => key == "page"))
-            {
-                IList<Page> pages;
-                if (TryParsePages(collection["page"], out pages))
-                {
-                    editUserModel.User.Pages = pages;
-                }
-                else
-                {
-                    return Json("{error: invalid query}");
-                }
-            }
+//            if (collection.HasKeys() &&
+//                collection.AllKeys.Any(key => key == "page"))
+//            {
+//                IList<Page> pages;
+//                if (TryParsePages(collection["page"], out pages))
+//                {
+//                    editUserModel.User.Pages = pages;
+//                }
+//                else
+//                {
+//                    return Json("{error: invalid query}");
+//                }
+//            }
 
             User user = _userService.SaveOrUpdate(editUserModel.User);
             return RedirectToAction("Index");

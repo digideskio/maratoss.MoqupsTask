@@ -9,6 +9,7 @@
         height: 100%;
         margin: 0 auto;
     }
+
     td.ui-droppable {
         border: gray 1px solid;
         width: 100px;
@@ -41,23 +42,27 @@
     }
 
     function submitForm() {
+        $('#userPages').find("input[type=hidden]").each(function(index, value) {
+            var r = ";";
+        });
+
         $('#availablePages').empty();
         $('#rootForm').submit();
     }
 
 </script>
 
-@using (Html.BeginForm("SaveOrUpdate", "Home", FormMethod.Post, new {id="rootForm"}))
+@using (Html.BeginForm("SaveOrUpdate", "Home", FormMethod.Post, new { id = "rootForm" }))
 {
     @Html.HiddenFor(x => x.User.Id)
     <table width="100%">
         <tr>
             <td>Firstname</td>
-            <td>@Html.TextBoxFor(x => x.User.Firstname, new {id = "firstname", title = TooltipService.GetTooltipFor<User>(x => x.Firstname, Model.User.Id > 0 ? "EDIT" : "ADD")})</td>
+            <td>@Html.TextBoxFor(x => x.User.Firstname, new { id = "firstname", title = TooltipService.GetTooltipFor<User>(x => x.Firstname, Model.User.Id > 0 ? "EDIT" : "ADD") })</td>
         </tr>
         <tr>
             <td>Lastname</td>
-            <td>@Html.TextBoxFor(x => x.User.Lastname, new {title = TooltipService.GetTooltipFor<User>(x => x.Lastname, Model.User.Id > 0 ? "EDIT" : "ADD")})</td>
+            <td>@Html.TextBoxFor(x => x.User.Lastname, new { title = TooltipService.GetTooltipFor<User>(x => x.Lastname, Model.User.Id > 0 ? "EDIT" : "ADD") })</td>
         </tr>
         <tr>
             <td>Status</td>
@@ -73,21 +78,21 @@
         </tr>
         <tr>
             <td class="ui-droppable" id="userPages">
-                @foreach (Page page in @Model.User.Pages)
+                @*                @foreach (Page page in @Model.User.Pages)*@
+                @for (int i = 0; i < @Model.User.Pages.Count; i++)
                 {
                     <div class="ui-draggable">
-                        @page.Name
-                        <input type="hidden" name="page" value="@page.Id" />
+                        @Model.User.Pages[i].Name
+                        @Html.HiddenFor(x => x.User.Pages[i].Id)
                     </div>
                 }
-
             </td>
             <td class="ui-droppable" id="availablePages">
-                @foreach (Page page in @Model.AvailablePages)
+                @for (int i = 0; i < @Model.AvailablePages.Count; i++)
                 {
                     <div class="ui-draggable">
-                        @page.Name
-                        <input type="hidden" name="page" value="@page.Id" />
+                        @Model.AvailablePages[i].Name
+                        @Html.Hidden(string.Format("User.Pages[{0}].Id", @Model.User.Pages.Count + i), @Model.AvailablePages[i].Id)
                     </div>
                 }
             </td>
@@ -97,9 +102,9 @@
     <div id="buttons">
         <input type="button" value="Save" onclick="submitForm()" />
         <input type="button" value="Cancel" id="cancelButton" onclick="window.history.back()" />
-        @if(Model.User.Id > 0)
+        @if (Model.User.Id > 0)
         {
-             <input type="button" value="Delete" onclick="deleteEntity(@Model.User.Id)" />
+            <input type="button" value="Delete" onclick="deleteEntity(@Model.User.Id)" />
         }
     </div>
 }
