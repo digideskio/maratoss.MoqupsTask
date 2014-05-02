@@ -1,4 +1,7 @@
-﻿@model Moqups.App.Models.EditUserModel
+﻿@using Moqups.App.Models
+@using Moqups.Entities
+@using Page = Moqups.Entities.Page
+@model EditUserModel
 
 <style type="text/css">
     select.listbox {
@@ -6,31 +9,53 @@
         height: 100%;
         margin: 0 auto;
     }
+    td.ui-droppable {
+        border: gray 1px solid;
+        width: 100px;
+        height: 100px;
+    }
 </style>
 
 <script>
     $(function () {
-        $("#sortable1, #sortable2").sortable({
-            connectWith: ".connectedSortable"
-        }).disableSelection();
+        $('.ui-draggable').draggable({
+            helper : 'clone',
+            opacity : 0.3
+        });
+        
+        $('.ui-droppable').droppable({
+            tolerance : 'fit',
+            accept : '.ui-draggable',
+            drop : function(event, ui) {
+                $(this).append(ui.draggable);
+            }
+        });
     });
     
     function deleteEntity(idEntity) {
-        window.location.href = '@Url.Action("DeleteEntity", "Home")/' + idEntity;
+        if (confirm("Are you sure?")) {
+            window.location.href = '@Url.Action("DeleteUser", "Home")/' + idEntity;
+        }
     }
+
+    function submitForm() {
+        $('#availablePages').empty();
+        $('#rootForm').submit();
+    }
+
 </script>
 
-@using (Html.BeginForm("SaveOrUpdate", "Home", FormMethod.Post))
+@using (Html.BeginForm("SaveOrUpdate", "Home", FormMethod.Post, new {id="rootForm"}))
 {
     @Html.HiddenFor(x => x.User.Id)
     <table width="100%">
         <tr>
             <td>Firstname</td>
-            <td>@Html.TextBoxFor(x => x.User.Firstname)</td>
+            <td>@Html.TextBoxFor(x => x.User.Firstname, new {id = "firstname", title = TooltipService.GetTooltipFor<User>(x => x.Firstname, Model.User.Id > 0 ? "EDIT" : "ADD")})</td>
         </tr>
         <tr>
             <td>Lastname</td>
-            <td>@Html.TextBoxFor(x => x.User.Lastname)</td>
+            <td>@Html.TextBoxFor(x => x.User.Lastname, new {title = TooltipService.GetTooltipFor<User>(x => x.Lastname, Model.User.Id > 0 ? "EDIT" : "ADD")})</td>
         </tr>
         <tr>
             <td>Status</td>
@@ -45,19 +70,29 @@
             <td>Available pages</td>
         </tr>
         <tr>
-            <td>@Html.ListBoxFor(x => x.User.Pages, new MultiSelectList(@Model.User.Pages, "Id", "Name"), new { size = 4, id = "sortable2", @class = "listbox" })</td>
-            <td>
-                <select id="sortable1" multiple="multiple" size="4" class="listbox">
-                    @foreach (Moqups.Entities.Page page in @Model.AvailablePages)
-                    {
-                        <option value="@page.Id">@page.Name</option>
-                    }
-                </select>
+            <td class="ui-droppable" id="userPages">
+                @foreach (Page page in @Model.User.Pages)
+                {
+                    <div class="ui-draggable">
+                        @page.Name
+                        <input type="hidden" name="page" value="@page.Id" />
+                    </div>
+                }
+
+            </td>
+            <td class="ui-droppable" id="availablePages">
+                @foreach (Page page in @Model.AvailablePages)
+                {
+                    <div class="ui-draggable">
+                        @page.Name
+                        <input type="hidden" name="page" value="@page.Id" />
+                    </div>
+                }
             </td>
         </tr>
     </table>
     
-    <input type="submit" value="Save" />
+    <input type="button" value="Save" onclick="submitForm()" />
     <input type="button" value="Cancel" />
     if(Model.User.Id > 0)
     {

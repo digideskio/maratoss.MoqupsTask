@@ -28,6 +28,8 @@
                 sortRestart: true
             });
 
+            $("#firstname").tooltip();
+
             $("#dialog-message").hide();
         });
 
@@ -38,7 +40,7 @@
                 type: "GET",
                 url: '@Url.Action("DetailsUser", "Home")',
                 data: ({ id: userId }),
-                error: function (data, textStatus, jqXHR) {
+                error: function (data) {
                     alert(data.responseText);
                 },
                 success: function (data) {
@@ -60,16 +62,14 @@
                 }
             });
         }
-        
-        function saveEntity() {
-            $('#dialog-message').first('[form]').submit();
-        }
     </script>
 }
 
 <input type="button" value="Add" onclick="openWindow(false, 0)" />
 
-<div id="dialog-message" title="Edit user">
+<input type="text" title="asdasdasdasdasdasd" id="firstname"/>
+
+<div id="dialog-message">
 </div>
 
 <table class="tablesorter" id="myTable">

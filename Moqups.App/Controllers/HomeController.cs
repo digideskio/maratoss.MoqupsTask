@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using Moqups.App.Models;
@@ -40,17 +42,44 @@ namespace Moqups.App.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveOrUpdate(EditUserModel editUserModel)
+        public ActionResult SaveOrUpdate(EditUserModel editUserModel, FormCollection collection)
         {
+            if (collection.HasKeys() &&
+                collection.AllKeys.Any(key => key == "page"))
+            {
+                IList<Page> pages;
+                if (TryParsePages(collection["page"], out pages))
+                {
+                    editUserModel.User.Pages = pages;
+                }
+                else
+                {
+                    return Json("{error: invalid query}");
+                }
+            }
+
             User user = _userService.SaveOrUpdate(editUserModel.User);
             return RedirectToAction("Index");
         }
 
-        public ActionResult DeleteEntity(long id)
+        public ActionResult DeleteUser(long id)
         {
             _userService.Delete(id);
             
             return RedirectToAction("Index");
+        }
+
+        private bool TryParsePages(string pagesIds, out IList<Page> pages)
+        {
+            try {
+                pages = pagesIds.Split(new[] {','}).Select(x => new Page(long.Parse(x))).ToList();
+                return true;
+            }
+            catch (Exception e) {
+                Debug.WriteLine(e);
+                pages = Enumerable.Empty<Page>().ToList();
+                return false;
+            }
         }
     }
 }

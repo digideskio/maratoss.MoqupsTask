@@ -12,6 +12,7 @@ namespace Moqups.App
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            RegisterTooltip.Register();
 
             var bootsrapper = new MefBootstrapper();
 
