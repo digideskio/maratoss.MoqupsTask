@@ -17,7 +17,7 @@
     <property name="IsAdmin" type="Boolean">
       <column name="IsAdmin" not-null="true" />
     </property>
-    <set name="Pages" table="Relations" generic="true" cascade="all-delete-orphan">
+    <set name="Pages" table="Relations" generic="true" cascade="save-update">
       <key>
         <column name="UserId" not-null="true" />
       </key>

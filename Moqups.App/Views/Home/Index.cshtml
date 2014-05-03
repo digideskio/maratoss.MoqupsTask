@@ -38,6 +38,7 @@
             var dialogMessage = $("#dialog-message");
             $.ajax({
                 type: "GET",
+                cache: false,
                 url: '@Url.Action("DetailsUser", "Home")',
                 data: ({ id: userId }),
                 error: function (data) {
