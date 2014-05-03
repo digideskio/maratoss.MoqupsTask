@@ -39,6 +39,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BeginCollectionItem">
+      <HintPath>..\packages\BeginCollectionItem.1.2.1.0\lib\net35\BeginCollectionItem.dll</HintPath>
+    </Reference>
+    <Reference Include="Calabonga.Mvc.Extensions">
+      <HintPath>..\packages\MvcTools.2.0.6\lib\net40\Calabonga.Mvc.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Calabonga.Xml.Exports">
+      <HintPath>..\packages\XmlExport.0.2.1\lib\net40\Calabonga.Xml.Exports.dll</HintPath>
+    </Reference>
     <Reference Include="HibernatingRhinos.Profiler.Appender">
       <HintPath>..\nhprofiler\HibernatingRhinos.Profiler.Appender.dll</HintPath>
     </Reference>
@@ -156,6 +165,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ListModelBindingExtensions.cs" />
     <Compile Include="Models\EditUserModel.cs" />
     <Compile Include="Models\Mapper.cs" />
     <Compile Include="Models\TooltipService.cs" />
@@ -233,6 +243,7 @@
     <Content Include="x86\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="App_Code\Content.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Content\themes\pager\first.png" />
     <Content Include="Content\themes\pager\last.png" />
@@ -275,6 +286,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\DetailsUser.cshtml" />
     <Content Include="Views\Home\AddOrEditUserForm.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
+    <Content Include="Views\Shared\_LayoutExtended.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

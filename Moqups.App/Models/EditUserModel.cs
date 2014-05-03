@@ -19,19 +19,10 @@ namespace Moqups.App.Models
             Firstname = user.Firstname;
             Lastname = user.Lastname;
             Status = user.Status;
-            SelectedPageIds = user.Pages.Select(x => x.Id).ToArray();
-            Pages = user.Pages;
+            Pages = user.Pages.ToList();
+            IsAdmin = user.IsAdmin;
 
             AvailablePages = availablePages;
-            StatusList =
-                Enum.GetValues(typeof(Status))
-                    .Cast<Status>()
-                    .Select(x =>
-                        new SelectListItem {
-                            Text = x.ToString(),
-                            Value = ((int) x).ToString(),
-                            Selected = (x.Equals(user.Status))
-                        });
         }
 
         public long Id { get; set; }
@@ -44,7 +35,5 @@ namespace Moqups.App.Models
         public IList<Page> Pages { get; set; }
 
         public IList<Page> AvailablePages { get; set; }
-        public IEnumerable<SelectListItem> StatusList { get; set; }
-        public long[] SelectedPageIds { get; set; }
     }
 }

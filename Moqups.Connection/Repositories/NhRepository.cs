@@ -39,7 +39,8 @@ namespace Moqups.Connection.Repositories
 
         public virtual object Insert(TEntity entity)
         {
-            var keyEntity = Session.Save(entity);
+            var mergeEntity = Session.Merge(entity);
+            var keyEntity = Session.Save(mergeEntity);
             return keyEntity;
         }
         public virtual void Update(TEntity entity)
@@ -49,7 +50,8 @@ namespace Moqups.Connection.Repositories
         }
         public virtual void Delete(TEntity entity)
         {
-            Session.Delete(entity);
+            var mergeEntity = Session.Merge(entity);
+            Session.Delete(mergeEntity);
         }
         public virtual void Delete(Expression<Func<TEntity, bool>> predicate)
         {

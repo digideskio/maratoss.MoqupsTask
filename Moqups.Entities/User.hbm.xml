@@ -17,13 +17,13 @@
     <property name="IsAdmin" type="Boolean">
       <column name="IsAdmin" not-null="true" />
     </property>
-    <bag name="Pages" table="Relations" generic="true" cascade="all">
+    <set name="Pages" table="Relations" generic="true" cascade="all-delete-orphan">
       <key>
         <column name="UserId" not-null="true" />
       </key>
       <many-to-many class="Page" fetch="join">
         <column name="PageId" not-null="true" />
       </many-to-many>
-    </bag>
+    </set>
   </class>
 </hibernate-mapping>

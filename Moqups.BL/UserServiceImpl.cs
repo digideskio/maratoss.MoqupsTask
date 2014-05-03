@@ -45,7 +45,12 @@ namespace Moqups.BL
         {
             if (user == null) throw new ArgumentNullException("user");
             IRepository<User> repository = _repositoryFactory.Create<User>();
-            repository.Insert(user);
+            if (user.Id > 0) {
+                repository.Update(user);
+            }
+            else {
+                repository.Insert(user);
+            }
 
             return user;
         }
@@ -53,7 +58,7 @@ namespace Moqups.BL
         public void Delete(long id)
         {
             IRepository<User> repository = _repositoryFactory.Create<User>();
-            repository.Delete(new User(id));
+            repository.Delete(new User { Id = id });
         }
     }
 }

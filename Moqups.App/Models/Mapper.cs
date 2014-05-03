@@ -11,12 +11,13 @@ namespace Moqups.App.Models
                 return null;
             }
 
-            return new User(model.Id) {
+            return new User {
+                Id = model.Id,
                 Firstname = model.Firstname,
                 Lastname = model.Lastname,
                 IsAdmin = model.IsAdmin,
-                Pages = model.SelectedPageIds == null ? null : model.SelectedPageIds.Select(x => new Page(x)).ToList(),
-                Status = model.Status
+                Status = model.Status,
+                Pages = model.Pages
             };
         }
     }

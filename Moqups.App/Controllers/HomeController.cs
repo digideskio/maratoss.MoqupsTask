@@ -32,7 +32,7 @@ namespace Moqups.App.Controllers
 
         public ActionResult DetailsUser(long id)
         {
-            User user = id == 0 ? new User(0) : _userService.GetUserById(id);
+            User user = id == 0 ? new User() : _userService.GetUserById(id);
 
             if (user == null) {
                 throw new HttpResponseException(HttpStatusCode.NotFound);

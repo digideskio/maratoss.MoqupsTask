@@ -16,19 +16,13 @@ namespace Moqups.Entities
     {
         public User()
         {
-            Pages = new List<Page>();
-        }
-
-        public User(long id)
-            : this()
-        {
-            Id = id;
+            Pages = new HashSet<Page>();
         }
     
         public virtual long Id
         {
             get;
-            protected set;
+            set;
         }
         public virtual string Firstname
         {
@@ -50,7 +44,7 @@ namespace Moqups.Entities
             get;
             set;
         }
-        public virtual IList<Page> Pages
+        public virtual ICollection<Page> Pages
         {
             get;
             set;

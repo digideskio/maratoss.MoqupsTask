@@ -12,16 +12,7 @@ namespace Moqups.Entities
 {
     public class Page : IEntity<long>
     {
-        public Page()
-        {
-        }
-
-        public Page(long id)
-        {
-            Id = id;
-        }
-
-        public virtual long Id { get; protected set; }
+        public virtual long Id { get; set; }
         public virtual string Name { get; set; }
 
         // override object.Equals

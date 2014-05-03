@@ -19,14 +19,14 @@ namespace Moqups.BL
         {
             return
                 Enumerable.Range(1, 3)
-                    .Select(id => Builder<Page>.CreateNew().WithConstructor(() => new Page(id)).Build())
+                    .Select(id => Builder<Page>.CreateNew().WithConstructor(() => new Page { Id = id }).Build())
                     .ToList();
         }
 
         public User GetUserById(long id)
         {
             return Builder<User>.CreateNew()
-                .WithConstructor(() => new User(id))
+                .WithConstructor(() => new User{Id = id})
                 .With(x => x.Id, id)
                 .With(x => x.Pages, GetAvailablePages().Take(2).ToList())
                 .Build();
@@ -41,7 +41,7 @@ namespace Moqups.BL
             }
 
             // todo: create entity
-            return new User(777);
+            return new User { Id = 777 };
         }
 
         public void Delete(long id)
