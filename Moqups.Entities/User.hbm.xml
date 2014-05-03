@@ -17,7 +17,7 @@
     <property name="IsAdmin" type="Boolean">
       <column name="IsAdmin" not-null="true" />
     </property>
-    <bag name="Pages" table="Relations" generic="true">
+    <bag name="Pages" table="Relations" generic="true" cascade="all">
       <key>
         <column name="UserId" not-null="true" />
       </key>

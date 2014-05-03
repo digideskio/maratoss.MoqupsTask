@@ -20,6 +20,7 @@ namespace Moqups.Entities
         }
 
         public User(long id)
+            : this()
         {
             Id = id;
         }
