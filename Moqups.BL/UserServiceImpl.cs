@@ -24,7 +24,7 @@ namespace Moqups.BL
         public IList<User> GetUsers()
         {
             IRepository<User> repository = _repositoryFactory.Create<User>();
-            return repository.Specify().ToList();
+            return repository.SpecifyAndFetch(x => x.Pages).ToList();
         }
 
         public IList<Page> GetAvailablePages()

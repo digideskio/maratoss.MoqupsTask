@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Moqups.Connection.Infrastructure;
@@ -29,6 +30,13 @@ namespace Moqups.Connection.Repositories
         {
             return Session.Query<TEntity>();
         }
+
+        public virtual IQueryable<TEntity> SpecifyAndFetch<TRelated>(
+            Expression<Func<TEntity, IEnumerable<TRelated>>> relatedObjectSelector)
+        {
+            return Specify().FetchMany(relatedObjectSelector);
+        }
+
         public virtual object Insert(TEntity entity)
         {
             var keyEntity = Session.Save(entity);

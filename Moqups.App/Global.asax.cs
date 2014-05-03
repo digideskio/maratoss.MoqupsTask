@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using HibernatingRhinos.Profiler.Appender.NHibernate;
 using Moqups.App.App_Start;
 
 namespace Moqups.App
@@ -14,6 +15,9 @@ namespace Moqups.App
     {
         protected void Application_Start()
         {
+            log4net.Config.XmlConfigurator.Configure();
+            NHibernateProfiler.Initialize();
+
             var bootsrapper = new MefBootstrapper();
             Connect(bootsrapper.Container);
 

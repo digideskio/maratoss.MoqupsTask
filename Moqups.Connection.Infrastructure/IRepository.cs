@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -13,6 +14,8 @@ namespace Moqups.Connection.Infrastructure
         void Delete(TEntity entity);
         void Delete(Expression<Func<TEntity, bool>> predicate);
         IQueryable<TEntity> Specify();
+        IQueryable<TEntity> SpecifyAndFetch<TRelated>(
+            Expression<Func<TEntity, IEnumerable<TRelated>>> relatedObjectSelector);
     }
 
     public interface IRepository
