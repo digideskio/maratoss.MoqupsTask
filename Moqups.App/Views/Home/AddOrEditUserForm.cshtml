@@ -41,30 +41,40 @@
         }
     }
 
-    function submitForm() {
-        $('#availablePages').find('input').removeAttr('name');
-        $('form').submit();
-    }
-
     function OnSuccessOperation(data) {
-        $('#availablePages').find('input').attr('name', 'SelectedPageIds');
         if (data.error) {
             alert(data.error);
         } else {
             window.location.href = '@Url.Action("Index", "Home")';
+        }
     }
-}
+    
+    function OnFailedOperation(data) {
+        alert(data);
+    }
+
+    function OnCompleteOperation(data) {
+        $('#availablePages').find('input').attr('name', 'SelectedPageIds');
+    }
+    
+    function submitForm() {
+        $('#availablePages').find('input').removeAttr('name');
+    }
 </script>
-<div id="result">
-</div>
+
 @{Html.EnableClientValidation();}
 @{Html.EnableUnobtrusiveJavaScript();}
-@using (Ajax.BeginForm("SaveOrUpdate", "Home", new AjaxOptions
-{
-    OnSuccess = "OnSuccessOperation",
-    HttpMethod = "POST",
-    UpdateTargetId = "result"
-}))
+@{
+    var ajaxOptions = new AjaxOptions {
+        Url = @Url.Action("SaveOrUpdateAjax"),
+        OnSuccess = "OnSuccessOperation",
+        OnFailure = "OnFailedOperation",
+        OnComplete = "OnCompleteOperation",
+        HttpMethod = "POST"
+    };
+}
+
+@using (Ajax.BeginForm("SaveOrUpdate", "Home", ajaxOptions))
 {
     @Html.HiddenFor(x => x.Id)
     @Html.ValidationSummary(true)
@@ -123,7 +133,7 @@
     </table>
     
     <div id="buttons">
-        <input type="button" value="Save" onclick="submitForm()" />
+        <input type="submit" value="Save" onclick="submitForm()" />
         <input type="button" value="Cancel" id="cancelButton" onclick="window.history.back()" />
         @if (Model.Id > 0)
         {

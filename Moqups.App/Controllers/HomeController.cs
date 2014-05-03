@@ -44,6 +44,18 @@ namespace Moqups.App.Controllers
         {
             if (ModelState.IsValid) {
                 User user = _userService.SaveOrUpdate(editUserModel.ToUser());
+                return RedirectToAction("Index");
+            }
+
+            return View("DetailsUser", editUserModel);
+        }
+
+        [HttpPost]
+        public ActionResult SaveOrUpdateAjax(EditUserModel editUserModel)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = _userService.SaveOrUpdate(editUserModel.ToUser());
                 return Json(new { result = "Success" });
             }
 
