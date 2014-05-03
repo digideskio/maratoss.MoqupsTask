@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using Moqups.Connection.Infrastructure;
 using NHibernate;
+using NHibernate.Linq;
 
 namespace Moqups.Connection.Repositories
 {
@@ -23,9 +25,9 @@ namespace Moqups.Connection.Repositories
         {
             return Session.Load<TEntity>(id);
         }
-        public virtual IQueryOver<TEntity, TEntity> Specify()
+        public virtual IQueryable<TEntity> Specify()
         {
-            return Session.QueryOver<TEntity>();
+            return Session.Query<TEntity>();
         }
         public virtual object Insert(TEntity entity)
         {

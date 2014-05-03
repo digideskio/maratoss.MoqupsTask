@@ -17,7 +17,7 @@ namespace Moqups.Connection
             _repositoryProvider = repositoryProvider;
         }
 
-        public INhRepository<TEntity> Create<TEntity>()
+        public IRepository<TEntity> Create<TEntity>()
             where TEntity : class
         {
             var repository = _repositoryProvider.GetRepository<TEntity>(_sessionProvider.CurrentSession);

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-configuration xmlns="urn:nhibernate-configuration-2.2">
+  <session-factory>
+    <property name="connection.provider">NHibernate.Connection.DriverConnectionProvider</property>
+    <property name="dialect">NHibernate.Dialect.SQLiteDialect</property>
+    <property name="connection.connection_string">Data Source=MoqupsDb.sqlite;Version=3</property>
+    <property name="connection.driver_class">NHibernate.Driver.SQLite20Driver, NHibernate</property>
+    <property name="proxyfactory.factory_class">NHibernate.Bytecode.DefaultProxyFactoryFactory, NHibernate</property>
+    <property name="show_sql">true</property>
+    <property name="cache.use_minimal_puts">false</property>
+    <property name="cache.use_query_cache">false</property>
+    <property name="generate_statistics">false</property>
+    <property name="use_proxy_validator">true</property>
+    <property name="current_session_context_class">web</property>
+    <mapping assembly="Moqups.Entities" />
+  </session-factory>
+</hibernate-configuration>

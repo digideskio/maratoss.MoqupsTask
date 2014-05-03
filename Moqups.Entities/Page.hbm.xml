@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="Moqups.Entities" namespace="Moqups.Entities" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Page" table="Pages">
+    <id name="Id" type="Int64">
+      <column name="Id" not-null="true" />
+      <generator class="native" />
+    </id>
+    <property name="Name" type="String">
+      <column name="Name" not-null="true" />
+    </property>
+  </class>
+</hibernate-mapping>

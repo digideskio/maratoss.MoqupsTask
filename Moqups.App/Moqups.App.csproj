@@ -39,7 +39,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Iesi.Collections.3.2.0.1001\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
@@ -126,6 +134,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\MefBootstrapper.cs" />
     <Compile Include="App_Start\MefControllerFactory.cs" />
+    <Compile Include="App_Start\NhConnectionAdapter.cs" />
     <Compile Include="App_Start\RegisterTooltip.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -211,6 +220,7 @@
     <Content Include="Content\themes\pager\next.png" />
     <Content Include="Content\themes\pager\pager.css" />
     <Content Include="Content\themes\pager\prev.png" />
+    <Content Include="hibernate.cfg.xml" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -257,6 +267,14 @@
     <ProjectReference Include="..\Moqups.BL.Infrastructure\Moqups.BL.Infrastructure.csproj">
       <Project>{AF8C57B2-6805-4E18-BB3E-F3250E9FB37C}</Project>
       <Name>Moqups.BL.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Moqups.Connection.Infrastructure\Moqups.Connection.Infrastructure.csproj">
+      <Project>{F2C7DDC2-27E4-427A-8B3E-E8C285A26BFD}</Project>
+      <Name>Moqups.Connection.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Moqups.Connection\Moqups.Connection.csproj">
+      <Project>{E3EA76BD-68B4-4C15-A692-D681DB9B6870}</Project>
+      <Name>Moqups.Connection</Name>
     </ProjectReference>
     <ProjectReference Include="..\Moqups.Entities\Moqups.Entities.csproj">
       <Project>{0FA3607F-84D2-4D43-AA3D-5BCC7292F1E1}</Project>

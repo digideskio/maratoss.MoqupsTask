@@ -19,7 +19,7 @@ namespace Moqups.App.App_Start
             _container = new CompositionContainer(GetCatalog());
         }
 
-        public CompositionContainer IoC
+        public CompositionContainer Container
         {
             get { return _container; }
         }

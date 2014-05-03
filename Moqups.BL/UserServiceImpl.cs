@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using FizzWare.NBuilder;
 using Moqups.BL.Infrastructure;
+using Moqups.Connection.Infrastructure;
+using Moqups.Connection.Repositories;
 using Moqups.Entities;
 
 namespace Moqups.BL
@@ -10,43 +12,48 @@ namespace Moqups.BL
     [Export(typeof(IUserService)), PartCreationPolicy(CreationPolicy.NonShared)]
     public class UserServiceImpl : IUserService
     {
+        private readonly IRepositoryFactory _repositoryFactory;
+
+        [ImportingConstructor]
+        public UserServiceImpl(IRepositoryFactory repositoryFactory)
+        {
+            if (repositoryFactory == null) throw new ArgumentNullException("repositoryFactory");
+            _repositoryFactory = repositoryFactory;
+        }
+
         public IList<User> GetUsers()
         {
-            return Enumerable.Range(1, 10).Select(id => GetUserById(id)).ToList();
+            IRepository<User> repository = _repositoryFactory.Create<User>();
+            return repository.Specify().ToList();
         }
 
         public IList<Page> GetAvailablePages()
         {
-            return
-                Enumerable.Range(1, 3)
-                    .Select(id => Builder<Page>.CreateNew().WithConstructor(() => new Page(id)).Build())
-                    .ToList();
+            IRepository<Page> repository = _repositoryFactory.Create<Page>();
+            return repository.Specify().ToList();
         }
 
         public User GetUserById(long id)
         {
-            return Builder<User>.CreateNew()
-                .WithConstructor(() => new User(id))
-                .With(x => x.Id, id)
-                .With(x => x.Pages, GetAvailablePages().Take(2).ToList())
-                .Build();
+            IRepository<User> repository = _repositoryFactory.Create<User>();
+            User user = repository.Get(id);
+
+            return user;
         }
 
         public User SaveOrUpdate(User user)
         {
-            if (user.Id > 0)
-            {
-                // todo: update entity
-                return user;
-            }
+            if (user == null) throw new ArgumentNullException("user");
+            IRepository<User> repository = _repositoryFactory.Create<User>();
+            repository.Insert(user);
 
-            // todo: create entity
-            return new User(777);
+            return user;
         }
 
         public void Delete(long id)
         {
-            //todo: deleting entity with id
+            IRepository<User> repository = _repositoryFactory.Create<User>();
+            repository.Delete(new User(id));
         }
     }
 }

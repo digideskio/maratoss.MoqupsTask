@@ -50,8 +50,7 @@ namespace Moqups.Connection
                 string.Format(
                     @"Data Source={0};
                       User ID={1};
-                      Password={2};
-                      Validate Connection=true",
+                      Password={2};",
                     database,
                     login,
                     password));
