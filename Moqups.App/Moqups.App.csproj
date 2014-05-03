@@ -134,7 +134,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\EditUserModel.cs" />
+    <Compile Include="Models\Mapper.cs" />
     <Compile Include="Models\TooltipService.cs" />
+    <Compile Include="Models\ValidateAjaxAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using Moqups.App.Models;
@@ -29,7 +27,7 @@ namespace Moqups.App.Controllers
 
         public ActionResult DetailsUser(long id)
         {
-            User user = id == 0 ? new User() : _userService.GetUserById(id);
+            User user = id == 0 ? new User(0) : _userService.GetUserById(id);
             IList<Page> availablePages = _userService.GetAvailablePages();
 
             var model = new EditUserModel(user, availablePages.Except(user.Pages).ToList());
@@ -44,22 +42,12 @@ namespace Moqups.App.Controllers
         [HttpPost]
         public ActionResult SaveOrUpdate(EditUserModel editUserModel)
         {
-//            if (collection.HasKeys() &&
-//                collection.AllKeys.Any(key => key == "page"))
-//            {
-//                IList<Page> pages;
-//                if (TryParsePages(collection["page"], out pages))
-//                {
-//                    editUserModel.User.Pages = pages;
-//                }
-//                else
-//                {
-//                    return Json("{error: invalid query}");
-//                }
-//            }
+            if (ModelState.IsValid) {
+                User user = _userService.SaveOrUpdate(editUserModel.ToUser());
+                return Json(new { result = "Success" });
+            }
 
-            User user = _userService.SaveOrUpdate(editUserModel.User);
-            return RedirectToAction("Index");
+            return Json(new { error = "Invalid" });
         }
 
         public ActionResult DeleteUser(long id)
@@ -67,19 +55,6 @@ namespace Moqups.App.Controllers
             _userService.Delete(id);
             
             return RedirectToAction("Index");
-        }
-
-        private bool TryParsePages(string pagesIds, out IList<Page> pages)
-        {
-            try {
-                pages = pagesIds.Split(new[] {','}).Select(x => new Page(long.Parse(x))).ToList();
-                return true;
-            }
-            catch (Exception e) {
-                Debug.WriteLine(e);
-                pages = Enumerable.Empty<Page>().ToList();
-                return false;
-            }
         }
     }
 }

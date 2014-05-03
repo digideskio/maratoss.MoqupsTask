@@ -42,35 +42,59 @@
     }
 
     function submitForm() {
-        $('#userPages').find("input[type=hidden]").each(function(index, value) {
-            var r = ";";
-        });
-
-        $('#availablePages').empty();
-        $('#rootForm').submit();
+        $('#availablePages').find('input').removeAttr('name');
+        $('form').submit();
     }
 
+    function OnSuccessOperation(data) {
+        $('#availablePages').find('input').attr('name', 'SelectedPageIds');
+        if (data.error) {
+            alert(data.error);
+        } else {
+            window.location.href = '@Url.Action("Index", "Home")';
+    }
+}
 </script>
-
-@using (Html.BeginForm("SaveOrUpdate", "Home", FormMethod.Post, new { id = "rootForm" }))
+<div id="result">
+</div>
+@{Html.EnableClientValidation();}
+@{Html.EnableUnobtrusiveJavaScript();}
+@using (Ajax.BeginForm("SaveOrUpdate", "Home", new AjaxOptions
 {
-    @Html.HiddenFor(x => x.User.Id)
+    OnSuccess = "OnSuccessOperation",
+    HttpMethod = "POST",
+    UpdateTargetId = "result"
+}))
+{
+    @Html.HiddenFor(x => x.Id)
+    @Html.ValidationSummary(true)
     <table width="100%">
         <tr>
             <td>Firstname</td>
-            <td>@Html.TextBoxFor(x => x.User.Firstname, new { id = "firstname", title = TooltipService.GetTooltipFor<User>(x => x.Firstname, Model.User.Id > 0 ? "EDIT" : "ADD") })</td>
+            @{
+                string tooltip = TooltipService.GetTooltipFor<User>(x => x.Firstname, Model.Id > 0 ? "EDIT" : "ADD");
+            }
+            <td>@Html.TextBoxFor(x => x.Firstname, new { id = "firstname", title = tooltip })
+                @Html.ValidationMessageFor(x => x.Firstname)
+            </td>
         </tr>
         <tr>
             <td>Lastname</td>
-            <td>@Html.TextBoxFor(x => x.User.Lastname, new { title = TooltipService.GetTooltipFor<User>(x => x.Lastname, Model.User.Id > 0 ? "EDIT" : "ADD") })</td>
+            @{
+                tooltip = TooltipService.GetTooltipFor<User>(x => x.Lastname, Model.Id > 0 ? "EDIT" : "ADD");
+            }
+
+            <td>@Html.TextBoxFor(x => x.Lastname, new { title = tooltip })
+                @Html.ValidationMessageFor(x => x.Lastname)
+            </td>
         </tr>
         <tr>
             <td>Status</td>
-            <td>@Html.DropDownListFor(x => x.User.Status, @Model.StatusList)</td>
+            <td>@Html.DropDownListFor(x => x.Status, @Model.StatusList)</td>
         </tr>
         <tr>
             <td></td>
-            <td>@Html.CheckBoxFor(x => x.User.IsAdmin)Admin</td>
+            <td>@Html.CheckBoxFor(x => x.IsAdmin)Admin</td>
         </tr>
         <tr>
             <td>User's pages</td>
@@ -78,12 +102,11 @@
         </tr>
         <tr>
             <td class="ui-droppable" id="userPages">
-                @*                @foreach (Page page in @Model.User.Pages)*@
-                @for (int i = 0; i < @Model.User.Pages.Count; i++)
+                @for (int i = 0; i < @Model.Pages.Count; i++)
                 {
                     <div class="ui-draggable">
-                        @Model.User.Pages[i].Name
-                        @Html.HiddenFor(x => x.User.Pages[i].Id)
+                        @Model.Pages[i].Name
+                        <input type="hidden" name="SelectedPageIds" value="@Model.Pages[i].Id"/>
                     </div>
                 }
             </td>
@@ -92,7 +115,7 @@
                 {
                     <div class="ui-draggable">
                         @Model.AvailablePages[i].Name
-                        @Html.Hidden(string.Format("User.Pages[{0}].Id", @Model.User.Pages.Count + i), @Model.AvailablePages[i].Id)
+                        <input type="hidden" name="SelectedPageIds" value="@Model.AvailablePages[i].Id" />
                     </div>
                 }
             </td>
@@ -102,9 +125,9 @@
     <div id="buttons">
         <input type="button" value="Save" onclick="submitForm()" />
         <input type="button" value="Cancel" id="cancelButton" onclick="window.history.back()" />
-        @if (Model.User.Id > 0)
+        @if (Model.Id > 0)
         {
-            <input type="button" value="Delete" onclick="deleteEntity(@Model.User.Id)" />
+            <input type="button" value="Delete" onclick="deleteEntity(@Model.Id)" />
         }
     </div>
 }

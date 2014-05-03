@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using FizzWare.NBuilder;
 using Moqups.BL.Infrastructure;
 using Moqups.Entities;
@@ -11,26 +12,23 @@ namespace Moqups.BL
     {
         public IList<User> GetUsers()
         {
-            return Builder<User>.CreateListOfSize(10)
-                .TheFirst(3)
-                .With(x => x.Pages, Builder<Page>.CreateListOfSize(3).Build())
-                .TheNext(3)
-                .With(x => x.Pages, Builder<Page>.CreateListOfSize(2).Build())
-                .TheNext(4)
-                .With(x => x.Pages, Builder<Page>.CreateListOfSize(1).Build())
-                .Build();
+            return Enumerable.Range(1, 10).Select(id => GetUserById(id)).ToList();
         }
 
         public IList<Page> GetAvailablePages()
         {
-            return Builder<Page>.CreateListOfSize(3).Build();
+            return
+                Enumerable.Range(1, 3)
+                    .Select(id => Builder<Page>.CreateNew().WithConstructor(() => new Page(id)).Build())
+                    .ToList();
         }
 
         public User GetUserById(long id)
         {
             return Builder<User>.CreateNew()
+                .WithConstructor(() => new User(id))
                 .With(x => x.Id, id)
-                .With(x => x.Pages, Builder<Page>.CreateListOfSize(2).Build())
+                .With(x => x.Pages, GetAvailablePages().Take(2).ToList())
                 .Build();
         }
 

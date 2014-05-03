@@ -1,5 +1,5 @@
 ﻿@using Moqups.Entities
-@model IList<Moqups.Entities.User>
+@model IList<User>
 
 @{
     ViewBag.Title = "Index";
@@ -9,7 +9,11 @@
 @section head
 {
     <link href="/Content/themes/base/jquery-ui.css" rel="stylesheet">
+    <link href="/Content/themes/base/jquery.ui.all.css" rel="stylesheet">
     <script src="/Scripts/jquery-ui-1.10.4.min.js"></script>
+    <script src="/Scripts/jquery.validate.min.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
     <!-- Pick a theme, load the plugin & initialize plugin -->
     <link href="/Content/themes/sorter/theme.default.css" rel="stylesheet">
@@ -27,8 +31,6 @@
                 sortReset: true,
                 sortRestart: true
             });
-
-            //$("#dialog-message").dialog("close");
         });
 
         function openWindow(isEdit, userId) {

@@ -2,15 +2,12 @@
 {
     public class Page : IEntity<long>
     {
-        public Page()
-        {
-        }
         public Page(long id)
         {
             Id = id;
         }
 
-        public long Id { get; set; }
+        public long Id { get; private set; }
         public string Name { get; set; }
 
         // override object.Equals
