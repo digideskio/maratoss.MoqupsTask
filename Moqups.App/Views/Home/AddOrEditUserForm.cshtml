@@ -16,6 +16,16 @@
         width: 100px;
         height: 100px;
     }
+
+    #progressbar {
+        display: none;
+        position: absolute;
+        top:0; right:0;
+        bottom:0; left:0;
+        -ms-opacity: 0.1;
+        opacity: 0.1;
+        background: black;
+    }
 </style>
 
 <script>
@@ -55,28 +65,39 @@
     }
 
     function OnCompleteOperation(data) {
-        $('#availablePages').find('input').attr('name', 'SelectedPageIds');
+        $('#availablePages :input').attr('disabled', false);
     }
     
     function submitForm() {
-        $('#availablePages').find('input').removeAttr('name');
+        $('#availablePages :input').attr('disabled', true);
+    }
+    
+    function OnBegin() {
     }
 </script>
 
 @{Html.EnableClientValidation();}
 @{Html.EnableUnobtrusiveJavaScript();}
 @{
-    var ajaxOptions = new AjaxOptions {
+    var ajaxOptions = new AjaxOptions
+    {
         Url = @Url.Action("SaveOrUpdateAjax"),
         OnSuccess = "OnSuccessOperation",
         OnFailure = "OnFailedOperation",
         OnComplete = "OnCompleteOperation",
+        LoadingElementId = "progressbar",
+        OnBegin = "OnBegin",
         HttpMethod = "POST"
     };
 }
 
 @using (Ajax.BeginForm("SaveOrUpdate", "Home", ajaxOptions))
 {
+    <div id="progressbar">
+        <div class="loading">
+            loading...
+        </div>
+    </div>
     @Html.HiddenIndexerInputForModel()
     @Html.HiddenFor(x => x.Id)
     @Html.ValidationSummary(true)
@@ -84,7 +105,7 @@
         <tr>
             <td>Firstname</td>
             @{
-                string tooltip = TooltipService.GetTooltipFor<User>(x => x.Firstname, Model.Id > 0 ? "EDIT" : "ADD");
+    string tooltip = TooltipService.GetTooltipFor<User>(x => x.Firstname, Model.Id > 0 ? "EDIT" : "ADD");
             }
             <td>@Html.TextBoxFor(x => x.Firstname, new { id = "firstname", title = tooltip })
                 @Html.ValidationMessageFor(x => x.Firstname)
@@ -93,7 +114,7 @@
         <tr>
             <td>Lastname</td>
             @{
-                tooltip = TooltipService.GetTooltipFor<User>(x => x.Lastname, Model.Id > 0 ? "EDIT" : "ADD");
+    tooltip = TooltipService.GetTooltipFor<User>(x => x.Lastname, Model.Id > 0 ? "EDIT" : "ADD");
             }
 
             <td>@Html.TextBoxFor(x => x.Lastname, new { title = tooltip })

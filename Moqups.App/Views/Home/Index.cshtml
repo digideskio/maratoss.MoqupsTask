@@ -19,6 +19,28 @@
     <link href="/Content/themes/sorter/theme.default.css" rel="stylesheet">
     <script src="/Scripts/jquery.tablesorter.min.js"></script>
     <script src="/Scripts/jquery.tablesorter.widgets.min.js"></script>
+    
+    <style rel="stylesheet">
+        #foreground {
+            display: none;
+            position: absolute;
+            top: 0;right: 0;
+            bottom: 0;left: 0;
+            -ms-opacity: 0.3;
+            opacity: 0.3;
+            background: black;
+        }
+
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -50px;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
 }
 
 @section scripts
@@ -36,11 +58,15 @@
         function openWindow(isEdit, userId) {
             var titleWindow = isEdit ? "Edit user" : "Add user";
             var dialogMessage = $("#dialog-message");
+            $("#foreground").show();
             $.ajax({
                 type: "GET",
                 cache: false,
                 url: '@Url.Action("DetailsUser", "Home")',
                 data: ({ id: userId }),
+                complete: function() {
+                    $("#foreground").hide();
+                },
                 error: function (data) {
                     alert(data.responseText);
                 },
@@ -61,7 +87,11 @@
         }
     </script>
 }
-
+<div id="foreground">
+    <div class="loading">
+        loading...
+    </div>
+</div>
 <input type="button" value="Add" onclick="openWindow(false, 0)" />
 
 <div id="dialog-message">
