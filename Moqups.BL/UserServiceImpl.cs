@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using DAL.Infrastructure;
 using Moqups.BL.Infrastructure;
-using Moqups.Connection.Infrastructure;
-using Moqups.Connection.Repositories;
 using Moqups.Entities;
 
 namespace Moqups.BL

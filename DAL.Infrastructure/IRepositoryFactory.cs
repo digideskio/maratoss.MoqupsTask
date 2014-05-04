@@ -1,6 +1,4 @@
-using Moqups.Connection.Infrastructure;
-
-namespace Moqups.Connection.Repositories
+namespace DAL.Infrastructure
 {
     public interface IRepositoryFactory
     {

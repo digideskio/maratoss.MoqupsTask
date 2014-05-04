@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 
-namespace Moqups.Connection.Repositories
+namespace DAL
 {
     [MetadataAttribute]
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]

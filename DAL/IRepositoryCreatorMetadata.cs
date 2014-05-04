@@ -1,8 +1,8 @@
 ﻿using System;
-using Moqups.Connection.Infrastructure;
+using DAL.Infrastructure;
 using NHibernate;
 
-namespace Moqups.Connection.Repositories
+namespace DAL
 {
     internal interface IRepositoryCreatorMetadata
     {

@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.Composition;
-using Moqups.Connection.Infrastructure;
-using Moqups.Connection.Repositories;
+using DAL.Infrastructure;
 
-namespace Moqups.Connection
+namespace DAL
 {
     [Export(typeof(IRepositoryFactory))]
     public class RepositoryFactory : IRepositoryFactory
@@ -24,7 +23,7 @@ namespace Moqups.Connection
 
             if (repository != null)
             {
-                return (INhRepository<TEntity>)repository;
+                return (IRepository<TEntity>)repository;
             }
 
             return new NhRepository<TEntity>(_sessionProvider.CurrentSession);

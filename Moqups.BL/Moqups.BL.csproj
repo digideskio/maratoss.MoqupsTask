@@ -48,17 +48,13 @@
     <Compile Include="UserServiceImpl.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DAL.Infrastructure\DAL.Infrastructure.csproj">
+      <Project>{646DBB47-729D-4A05-88E0-D6D9D8350913}</Project>
+      <Name>DAL.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Moqups.BL.Infrastructure\Moqups.BL.Infrastructure.csproj">
       <Project>{AF8C57B2-6805-4E18-BB3E-F3250E9FB37C}</Project>
       <Name>Moqups.BL.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Moqups.Connection.Infrastructure\Moqups.Connection.Infrastructure.csproj">
-      <Project>{F2C7DDC2-27E4-427A-8B3E-E8C285A26BFD}</Project>
-      <Name>Moqups.Connection.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Moqups.Connection\Moqups.Connection.csproj">
-      <Project>{E3EA76BD-68B4-4C15-A692-D681DB9B6870}</Project>
-      <Name>Moqups.Connection</Name>
     </ProjectReference>
     <ProjectReference Include="..\Moqups.Entities\Moqups.Entities.csproj">
       <Project>{0FA3607F-84D2-4D43-AA3D-5BCC7292F1E1}</Project>
@@ -70,7 +66,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y "$(TargetPath)" "$(SolutionDir)\Moqups.App\bin"</PostBuildEvent>
+    <PostBuildEvent>xcopy /y "$(TargetPath)" "$(SolutionDir)\Moqups.App\forMef"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

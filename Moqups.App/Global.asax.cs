@@ -9,6 +9,7 @@ using System.Web.Routing;
 using HibernatingRhinos.Profiler.Appender.NHibernate;
 using Moqups.App.App_Start;
 using Moqups.App.Exceptions;
+using Moqups.Connection.Infrastructure;
 
 namespace Moqups.App
 {
@@ -36,8 +37,7 @@ namespace Moqups.App
 
         private static void Connect(CompositionContainer container)
         {
-            var connection = container.GetExportedValue<NhConnectionAdapter>();
-            connection.SetConfigFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "hibernate.cfg.xml"));
+            var connection = container.GetExportedValue<IConnection>();
             connection.Connecting();
         }
     }
