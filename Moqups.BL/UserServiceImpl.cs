@@ -59,5 +59,11 @@ namespace Moqups.BL
             IRepository<User> repository = _repositoryFactory.Create<User>();
             repository.Delete(new User { Id = id });
         }
+
+        public bool IsUserExist(long id)
+        {
+            IRepository<User> repository = _repositoryFactory.Create<User>();
+            return repository.Specify().Any(x => x.Id == id);
+        }
     }
 }

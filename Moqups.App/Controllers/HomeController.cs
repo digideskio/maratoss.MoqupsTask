@@ -36,7 +36,8 @@ namespace Moqups.App.Controllers
         {
             User user = id == 0 ? new User() : _userService.GetUserById(id);
 
-            if (user == null) {
+            if (user == null)
+            {
                 throw new RecordIsNotFoundException(string.Format("The user with id#{0} not found", id));
             }
 
@@ -54,9 +55,9 @@ namespace Moqups.App.Controllers
         [System.Web.Mvc.HttpPost]
         public ActionResult SaveOrUpdate(EditUserModel editUserModel)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
-                using (IUnitOfWork unitOfWork = _unitOfWorkFactory.Create()) 
+                using (IUnitOfWork unitOfWork = _unitOfWorkFactory.Create())
                 {
                     User user = _userService.SaveOrUpdate(editUserModel.ToUser());
                     unitOfWork.Commit();
@@ -70,9 +71,9 @@ namespace Moqups.App.Controllers
         [System.Web.Mvc.HttpPost]
         public ActionResult SaveOrUpdateAjax(EditUserModel editUserModel)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
-                using (IUnitOfWork unitOfWork = _unitOfWorkFactory.Create()) 
+                using (IUnitOfWork unitOfWork = _unitOfWorkFactory.Create())
                 {
                     User user = _userService.SaveOrUpdate(editUserModel.ToUser());
                     unitOfWork.Commit();
@@ -85,10 +86,13 @@ namespace Moqups.App.Controllers
 
         public ActionResult DeleteUser(long id)
         {
-            using (IUnitOfWork unitOfWork = _unitOfWorkFactory.Create())
+            if (_userService.IsUserExist(id))
             {
-                _userService.Delete(id);
-                unitOfWork.Commit();
+                using (IUnitOfWork unitOfWork = _unitOfWorkFactory.Create())
+                {
+                    _userService.Delete(id);
+                    unitOfWork.Commit();
+                }
             }
 
             return RedirectToAction("Index");

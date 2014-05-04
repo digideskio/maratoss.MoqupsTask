@@ -41,12 +41,17 @@ namespace Moqups.BL
             }
 
             // todo: create entity
-            return new User { Id = 777 };
+            return new User { Id = 99 };
         }
 
         public void Delete(long id)
         {
             //todo: deleting entity with id
+        }
+
+        public bool IsUserExist(long id)
+        {
+            return id < 100;
         }
     }
 }

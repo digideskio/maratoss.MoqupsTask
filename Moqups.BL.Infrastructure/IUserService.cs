@@ -10,5 +10,6 @@ namespace Moqups.BL.Infrastructure
         User GetUserById(long id);
         User SaveOrUpdate(User user);
         void Delete(long id);
+        bool IsUserExist(long id);
     }
 }
