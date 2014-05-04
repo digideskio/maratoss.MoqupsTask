@@ -8,7 +8,7 @@
     <property name="Firstname" type="String">
       <column name="Firstname" not-null="true" />
     </property>
-    <property name="Lastname" type="String">
+    <property name="Lastname" type="Int32">
       <column name="Lastname" not-null="true" />
     </property>
     <property name="Status" type="Int32">

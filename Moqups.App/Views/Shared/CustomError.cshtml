@@ -1,0 +1,13 @@
+﻿@model Moqups.App.Exceptions.FriendlyUserErrorMessage
+
+@{
+    ViewBag.Title = "CustomError";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Title</h2>
+@Model.Message
+<br/>
+Conclusions
+<hr />
+@Model.Conclusions

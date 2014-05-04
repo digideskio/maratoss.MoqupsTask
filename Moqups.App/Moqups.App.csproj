@@ -155,13 +155,23 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\ExportProviderMixin.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\HandleCustomError.cs" />
     <Compile Include="App_Start\MefBootstrapper.cs" />
     <Compile Include="App_Start\MefControllerFactory.cs" />
     <Compile Include="App_Start\NhConnectionAdapter.cs" />
     <Compile Include="App_Start\RegisterTooltip.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Exceptions\GenericADOHandler.cs" />
+    <Compile Include="Exceptions\RecordNotFoundHandler.cs" />
+    <Compile Include="Exceptions\FriendlyUserErrorMessage.cs" />
+    <Compile Include="Exceptions\HandlerExceptionForAttribute.cs" />
+    <Compile Include="Exceptions\IExceptionHandler.cs" />
+    <Compile Include="Exceptions\IExceptionHandlerFactory.cs" />
+    <Compile Include="Exceptions\IExceptionHandlerProvider.cs" />
+    <Compile Include="Exceptions\RecordIsNotFoundException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -288,6 +298,8 @@
     <Content Include="Views\Home\AddOrEditUserForm.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
     <Content Include="Views\Shared\_LayoutExtended.cshtml" />
+    <Content Include="Views\Shared\NoPageFound.cshtml" />
+    <Content Include="Views\Shared\CustomError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,11 +9,6 @@ namespace Moqups.App.App_Start
     {
         private readonly CompositionContainer _container;
 
-        static MefBootstrapper()
-        {
-            //log4net.Config.XmlConfigurator.Configure();
-        }
-
         public MefBootstrapper()
         {
             _container = new CompositionContainer(GetCatalog());

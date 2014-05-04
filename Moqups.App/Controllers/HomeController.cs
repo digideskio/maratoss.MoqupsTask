@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
 using System.Web.Mvc;
+using Moqups.App.Exceptions;
 using Moqups.App.Models;
 using Moqups.BL.Infrastructure;
 using Moqups.Connection.Infrastructure;
@@ -35,7 +37,7 @@ namespace Moqups.App.Controllers
             User user = id == 0 ? new User() : _userService.GetUserById(id);
 
             if (user == null) {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                throw new RecordIsNotFoundException(string.Format("The user with id#{0} not found", id));
             }
 
             IList<Page> availablePages = _userService.GetAvailablePages();

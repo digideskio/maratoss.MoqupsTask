@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using HibernatingRhinos.Profiler.Appender.NHibernate;
 using Moqups.App.App_Start;
+using Moqups.App.Exceptions;
 
 namespace Moqups.App
 {
@@ -27,7 +28,8 @@ namespace Moqups.App
             RegisterTooltip.Register();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters,
+                bootsrapper.Container.GetExportedValue<IExceptionHandlerFactory>());
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
