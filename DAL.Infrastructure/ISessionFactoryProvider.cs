@@ -1,6 +1,6 @@
 ﻿using NHibernate;
 
-namespace Moqups.Connection.Infrastructure
+namespace DAL.Infrastructure
 {
     public interface ISessionFactoryProvider
     {

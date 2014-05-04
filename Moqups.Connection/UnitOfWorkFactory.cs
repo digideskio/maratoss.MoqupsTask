@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Composition;
+using DAL.Infrastructure;
 using Moqups.Connection.Infrastructure;
 using NHibernate;
 

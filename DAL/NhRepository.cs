@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Moqups.Connection.Infrastructure;
+using DAL.Infrastructure;
 using NHibernate;
 using NHibernate.Linq;
 
-namespace Moqups.Connection.Repositories
+namespace DAL
 {
-    public class NhRepository<TEntity> : INhRepository<TEntity>
+    public class NhRepository<TEntity> : IRepository<TEntity>
         where TEntity : class
     {
         protected readonly ISession Session;

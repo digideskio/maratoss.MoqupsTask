@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using Moqups.Connection.Infrastructure;
+using DAL.Infrastructure;
 using NHibernate;
 
-namespace Moqups.Connection.Repositories
+namespace DAL
 {
     public interface IRepositoryProvider
     {

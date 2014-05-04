@@ -158,7 +158,6 @@
     <Compile Include="App_Start\HandleCustomError.cs" />
     <Compile Include="App_Start\MefBootstrapper.cs" />
     <Compile Include="App_Start\MefControllerFactory.cs" />
-    <Compile Include="App_Start\NhConnectionAdapter.cs" />
     <Compile Include="App_Start\RegisterTooltip.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -315,10 +314,6 @@
     <ProjectReference Include="..\Moqups.Connection.Infrastructure\Moqups.Connection.Infrastructure.csproj">
       <Project>{F2C7DDC2-27E4-427A-8B3E-E8C285A26BFD}</Project>
       <Name>Moqups.Connection.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Moqups.Connection\Moqups.Connection.csproj">
-      <Project>{E3EA76BD-68B4-4C15-A692-D681DB9B6870}</Project>
-      <Name>Moqups.Connection</Name>
     </ProjectReference>
     <ProjectReference Include="..\Moqups.Entities\Moqups.Entities.csproj">
       <Project>{0FA3607F-84D2-4D43-AA3D-5BCC7292F1E1}</Project>

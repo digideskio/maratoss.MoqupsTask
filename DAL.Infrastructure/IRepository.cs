@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Moqups.Connection.Infrastructure
+namespace DAL.Infrastructure
 {
     public interface IRepository<TEntity> : IRepository
     {

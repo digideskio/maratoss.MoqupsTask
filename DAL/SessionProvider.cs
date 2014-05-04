@@ -1,15 +1,10 @@
 ﻿using System.ComponentModel.Composition;
-using Moqups.Connection.Infrastructure;
+using DAL.Infrastructure;
 using NHibernate;
 using NHibernate.Context;
 
-namespace Moqups.Connection
+namespace DAL
 {
-    public interface ISessionProvider
-    {
-        ISession CurrentSession { get; }
-    }
-
     [Export(typeof(ISessionProvider))]
     public class SessionProvider : ISessionProvider
     {
@@ -29,7 +24,7 @@ namespace Moqups.Connection
                 {
                     CurrentSessionContext.Bind(_sessionFactory.OpenSession());
                 }
-                
+
                 return _sessionFactory.GetCurrentSession();
             }
         }
