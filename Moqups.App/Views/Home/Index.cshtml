@@ -79,7 +79,8 @@
                     });
 
                     var cancelButton = $("#dialog-message").find("#cancelButton");
-                    cancelButton.on("click", function() {
+                    cancelButton[0].onclick = null;
+                    cancelButton.on("click", function () {
                         dialogMessage.dialog("close");
                     });
                 }
