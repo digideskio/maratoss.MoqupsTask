@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Net;
-using System.Web.Http;
 using System.Web.Mvc;
 using Moqups.App.Exceptions;
 using Moqups.App.Models;
@@ -52,7 +49,7 @@ namespace Moqups.App.Controllers
             return View(model);
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public ActionResult SaveOrUpdate(EditUserModel editUserModel)
         {
             if (ModelState.IsValid)
@@ -68,7 +65,7 @@ namespace Moqups.App.Controllers
             return View("DetailsUser", editUserModel);
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public ActionResult SaveOrUpdateAjax(EditUserModel editUserModel)
         {
             if (ModelState.IsValid)
