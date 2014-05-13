@@ -19,13 +19,15 @@
     <link href="/Content/themes/sorter/theme.default.css" rel="stylesheet">
     <script src="/Scripts/jquery.tablesorter.min.js"></script>
     <script src="/Scripts/jquery.tablesorter.widgets.min.js"></script>
-    
+
     <style rel="stylesheet">
         #foreground {
             display: none;
             position: absolute;
-            top: 0;right: 0;
-            bottom: 0;left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
             -ms-opacity: 0.3;
             opacity: 0.3;
             background: black;
@@ -64,7 +66,7 @@
                 cache: false,
                 url: '@Url.Action("DetailsUser", "Home")',
                 data: ({ id: userId }),
-                complete: function() {
+                complete: function () {
                     $("#foreground").hide();
                 },
                 error: function (data) {
@@ -79,10 +81,12 @@
                     });
 
                     var cancelButton = $("#dialog-message").find("#cancelButton");
-                    cancelButton[0].onclick = null;
-                    cancelButton.on("click", function () {
-                        dialogMessage.dialog("close");
-                    });
+                    if (cancelButton.length > 0) {
+                        cancelButton[0].onclick = null;
+                        cancelButton.on("click", function () {
+                            dialogMessage.dialog("close");
+                        });
+                    }
                 }
             });
         }
@@ -116,7 +120,8 @@
                 <td>@user.Lastname</td>
                 <td>@user.Status</td>
                 <td>@(user.Pages.Aggregate(string.Empty, (accString, p2) => accString + "/" + p2.Name))</td>
-                <td><input type="checkbox" checked="@user.IsAdmin" disabled="disabled"/></td>
+                <td>
+                    <input type="checkbox" checked="@user.IsAdmin" disabled="disabled"/></td>
             </tr>
         }
     </tbody>
