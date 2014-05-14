@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="/Content/themes/base/jquery-ui.css" rel="stylesheet"/>
+    <link href="/Content/themes/base/jquery.ui.all.css" rel="stylesheet"/>
+
+    <script src="Scripts/jquery-1.8.2.min.js"></script>
+    <script src="/Scripts/jquery-ui-1.10.4.min.js"></script>
+    <script src="Scripts/knockout-3.1.0.js"></script>
+    <script src="Scripts/sammy-0.7.4.js"></script>
+    <script src="Scripts/app/Model.js"></script>
+    <script src="Scripts/app/Helper.js"></script>
+    
+    <script>
+        $(function () {
+            var navigateManager = new NavigateManager();
+            //navigateManager.RegisterView();
+
+            var model = new UserViewModel(navigateManager);
+            fillData(model);
+            ko.applyBindings(model);
+        });
+    </script>
+</head>
+    <body>
+        
+        <div id="dialog"></div>
+
+        <button data-bind="click: GoToAddUserCommand">Add</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Status</th>
+                    <th>Pages</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: Users">
+                <tr>
+                    <td><span data-bind="text: Firstname" /></td>
+                    <td><span data-bind="text: Lastname" /></td>
+                    <td><span data-bind="text: Status" /></td>
+                    <!-- ko foreach: Pages -->
+                    <td data-bind="text: $data.Name"> </td>
+                    <!-- /ko -->
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
