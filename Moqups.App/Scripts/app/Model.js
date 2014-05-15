@@ -1,6 +1,6 @@
 ﻿var User = function (id, fName, lName) {
     var self = this;
-    
+
     self.Id = id;
     self.Firstname = ko.observable(fName);
     self.Lastname = ko.observable(lName);
@@ -15,12 +15,12 @@
 
 var Page = function (id, name) {
     var self = this;
-    
+
     self.Id = id;
     self.Name = name;
 };
 
-var Status = function(id, value) {
+var Status = function (id, value) {
     var self = this;
 
     self.Id = id;
@@ -29,22 +29,34 @@ var Status = function(id, value) {
 
 var UserViewModel = function (navigateManager) {
     var self = this;
-    
+
     self.Users = ko.observableArray();
     self.GoToAddUserCommand = function () {
+
         var user = new User();
         user.Firstname('Firstname');
         user.Lastname('Lastname');
+        user.Pages().push(new Page(0, "Page 1"));
+        user.Pages().push(new Page(1, "Page 2"));
+        user.Pages().push(new Page(2, "Page 3"));
 
         var editUserViewModel = new EditUserViewModel(user);
-        
+
         $.getJSON('api/statuses')
             .done(function (data) {
-                $.each(data, function(key, item) {
+                $.each(data, function (key, item) {
                     editUserViewModel.AvaiableStatuses.push(new Status(item.Id, item.Value));
                 });
-                navigateManager.OpenInNewWindow(editUserViewModel);
             });
+        
+        $.getJSON('api/pages')
+            .done(function (data) {
+                $.each(data, function (key, item) {
+                    editUserViewModel.AvaiablePages().push(new Page(item.Id, item.Name));
+                });
+            });
+        
+        navigateManager.OpenInNewWindow(editUserViewModel);
     };
     self.GoToEditUserCommand = function (newUser) {
         alert('GoToEditUserCommand');

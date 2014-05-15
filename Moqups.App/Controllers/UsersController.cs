@@ -38,6 +38,23 @@ namespace Moqups.App.Controllers
         }
     }
 
+    [Export, PartCreationPolicy(CreationPolicy.NonShared)]
+    public class PagesController : ApiController
+    {
+        private readonly IUserService _userService;
+
+        [ImportingConstructor]
+        public PagesController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
+        public IEnumerable<Page> Get()
+        {
+            return _userService.GetAvailablePages();
+        }
+    }
+
     public class StatusModel
     {
         public int Id { get; set; }

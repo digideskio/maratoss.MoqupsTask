@@ -1,18 +1,65 @@
 ﻿<!--ViewModel: EditUserViewModel -->
 
+<script>
+    (function () {
+        var _dragged;
+        ko.bindingHandlers.drag = {
+            init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+                var dragElement = $(element);
+                var dragOptions = {
+                    helper: 'clone',
+                    revert: true,
+                    revertDuration: 0,
+                    start: function () {
+                        _dragged = ko.utils.unwrapObservable(valueAccessor().value);
+                    },
+                    cursor: 'default'
+                };
+                dragElement.draggable(dragOptions).disableSelection();
+            }
+        };
+
+        ko.bindingHandlers.drop = {
+            init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+                var dropElement = $(element);
+                var dropOptions = {
+                    drop: function (event, ui) {
+                        valueAccessor().value(_dragged);
+                    }
+                };
+                dropElement.droppable(dropOptions);
+            }
+        };
+    })();
+</script>
+
 Firstname
 <input type="text" data-bind="value: User().Firstname" />
 
-<br/>
+<br />
 
 Lastname
 <input type="text" data-bind="value: User().Lastname" />
 
-<br/>
+<br />
 
 <input type="checkbox" data-bind="checked: User().IsAdmin" />IsAdmin
 
-<br/>
+<br />
 
 Status
 <select data-bind="options: AvaiableStatuses, selectedOptions: User().Status, value: User().Status, optionsText: 'Value'"></select>
+
+<br />
+
+Pages:
+<div data-bind="foreach: User().Pages, drop: { value: User().Pages }" style="border: red solid 1px;">
+    <div data-bind="text: $data.Name, drag: { value: $data }"></div>
+    <br />
+</div>
+
+Available pages:
+<div data-bind="foreach: AvaiablePages, drop: { value: AvaiablePages }" style="border: red solid 1px">
+    <div data-bind="text: $data.Name, drag: { value: $data }"></div>
+    <br />
+</div>
