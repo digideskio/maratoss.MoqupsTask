@@ -163,7 +163,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UserApiController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Exceptions\GenericADOHandler.cs" />
     <Compile Include="Exceptions\RecordNotFoundHandler.cs" />
     <Compile Include="Exceptions\FriendlyUserErrorMessage.cs" />

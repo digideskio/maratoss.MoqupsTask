@@ -3,10 +3,16 @@
 Firstname
 <input type="text" data-bind="value: User().Firstname" />
 
+<br/>
+
 Lastname
 <input type="text" data-bind="value: User().Lastname" />
 
+<br/>
+
 <input type="checkbox" data-bind="checked: User().IsAdmin" />IsAdmin
 
+<br/>
+
 Status
-<select data-bind="options: Statuses, selectedOptions: User().Status" size="5"></select>
+<select data-bind="options: AvaiableStatuses, selectedOptions: User().Status, value: User().Status, optionsText: 'Value'"></select>

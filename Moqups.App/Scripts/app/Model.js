@@ -20,18 +20,31 @@ var Page = function (id, name) {
     self.Name = name;
 };
 
+var Status = function(id, value) {
+    var self = this;
+
+    self.Id = id;
+    self.Value = value;
+};
+
 var UserViewModel = function (navigateManager) {
     var self = this;
     
     self.Users = ko.observableArray();
     self.GoToAddUserCommand = function () {
-
         var user = new User();
         user.Firstname('Firstname');
         user.Lastname('Lastname');
-        
+
         var editUserViewModel = new EditUserViewModel(user);
-        navigateManager.OpenInNewWindow(editUserViewModel);
+        
+        $.getJSON('api/statuses')
+            .done(function (data) {
+                $.each(data, function(key, item) {
+                    editUserViewModel.AvaiableStatuses.push(new Status(item.Id, item.Value));
+                });
+                navigateManager.OpenInNewWindow(editUserViewModel);
+            });
     };
     self.GoToEditUserCommand = function (newUser) {
         alert('GoToEditUserCommand');
@@ -46,7 +59,7 @@ var EditUserViewModel = function (user) {
 
     self.User = ko.observable(user);
     self.AvaiablePages = ko.observableArray();
-    self.AvaiableStatus = [];
+    self.AvaiableStatuses = [];
     self.AddUserCommand = function () {
         alert('AddUserCommand');
     };
