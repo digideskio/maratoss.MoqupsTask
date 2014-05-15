@@ -34,6 +34,7 @@
                     <th>Firstname</th>
                     <th>Lastname</th>
                     <th>Status</th>
+                    <th>Is admin</th>
                     <th>Pages</th>
                 </tr>
             </thead>
@@ -42,6 +43,7 @@
                     <td><span data-bind="text: Firstname" /></td>
                     <td><span data-bind="text: Lastname" /></td>
                     <td><span data-bind="text: Status" /></td>
+                    <td><input type="checkbox" data-bind="checked: IsAdmin" disabled="disabled" /></td>
                     <!-- ko foreach: Pages -->
                     <td data-bind="text: $data.Name"> </td>
                     <!-- /ko -->

@@ -163,6 +163,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserApiController.cs" />
     <Compile Include="Exceptions\GenericADOHandler.cs" />
     <Compile Include="Exceptions\RecordNotFoundHandler.cs" />
     <Compile Include="Exceptions\FriendlyUserErrorMessage.cs" />
@@ -247,8 +248,13 @@
     <Content Include="Content\themes\sorter\theme.default.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="IndexSPA.html" />
+    <Content Include="Scripts\app\Helper.js" />
+    <Content Include="Scripts\app\Model.js" />
     <Content Include="Scripts\knockout-3.1.0.debug.js" />
     <Content Include="Scripts\knockout-3.1.0.js" />
+    <Content Include="Scripts\sammy-0.7.4.js" />
+    <Content Include="Scripts\sammy-0.7.4.min.js" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -302,7 +308,7 @@
     <Content Include="Views\Shared\_LayoutExtended.cshtml" />
     <Content Include="Views\Shared\NoPageFound.cshtml" />
     <Content Include="Views\Shared\CustomError.cshtml" />
-    <Content Include="Views\Home\User.cshtml" />
+    <Content Include="Views\Home\AddFromView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

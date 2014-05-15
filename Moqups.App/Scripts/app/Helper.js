@@ -13,12 +13,12 @@
 
 var NavigateManager = function () {
     var self = this;
-    self.OpenInNewWindow = function (viewModel) {
+    self.OpenInNewWindow = function (viewModel, contract) {
         //todo: download view and bind viewmodel
         var view = $('#dialog');
         $.ajax({
             type: "POST",
-            url: 'AddOrEditForm.html',
+            url: 'Home/GetAddForm',
             error: function (data) {
                 view.html(data.responseText);
                 //alert(data.responseText);
@@ -30,8 +30,7 @@ var NavigateManager = function () {
                     title: 'some title',
                     width: 350
                 });
-                view.html(data);
-                //BindData(viewModel);
+                ko.applyBindings(viewModel, view[0]);
                 view.dialog();
             }
         });

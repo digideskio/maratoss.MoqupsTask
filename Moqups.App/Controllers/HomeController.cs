@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.UI.WebControls.WebParts;
 using Moqups.App.Exceptions;
 using Moqups.App.Helpers;
 using Moqups.App.Models;
@@ -42,8 +43,7 @@ namespace Moqups.App.Controllers
 
             var model = new EditUserModel(user, availablePages.Except(user.Pages).ToList());
             if (Request.IsAjaxRequest()) {
-                return PartialView("User", model);
-                //return PartialView("AddOrEditUserForm", model);
+                return PartialView("AddOrEditUserForm", model);
             }
 
             return View(model);
@@ -93,6 +93,11 @@ namespace Moqups.App.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        public PartialViewResult GetAddForm()
+        {
+            return PartialView("AddFromView");
         }
     }
 }
