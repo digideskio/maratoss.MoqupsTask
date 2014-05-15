@@ -1,61 +1,13 @@
-﻿var User = function (id, fName, lName) {
-    var self = this;
-
-    self.Id = id;
-    self.Firstname = ko.observable(fName);
-    self.Lastname = ko.observable(lName);
-    self.Status = ko.observable(1);
-    self.IsAdmin = ko.observable();
-    self.Pages = ko.observableArray();
-};
-
-//User.prototype.toString = function() {
-//    return Name;
-//};
-
-var Page = function (id, name) {
-    var self = this;
-
-    self.Id = id;
-    self.Name = name;
-};
-
-var Status = function (id, value) {
-    var self = this;
-
-    self.Id = id;
-    self.Value = value;
-};
-
-var UserViewModel = function (navigateManager) {
+﻿var UserViewModel = function (navigateManager) {
     var self = this;
 
     self.Users = ko.observableArray();
     self.GoToAddUserCommand = function () {
+        var editUserViewModel = new EditUserViewModel(new User());
+        var service = new Service();
 
-        var user = new User();
-        user.Firstname('Firstname');
-        user.Lastname('Lastname');
-        user.Pages().push(new Page(0, "Page 1"));
-        user.Pages().push(new Page(1, "Page 2"));
-        user.Pages().push(new Page(2, "Page 3"));
-
-        var editUserViewModel = new EditUserViewModel(user);
-
-        $.getJSON('api/statuses')
-            .done(function (data) {
-                $.each(data, function (key, item) {
-                    editUserViewModel.AvaiableStatuses.push(new Status(item.Id, item.Value));
-                });
-            });
-        
-        $.getJSON('api/pages')
-            .done(function (data) {
-                $.each(data, function (key, item) {
-                    editUserViewModel.AvaiablePages().push(new Page(item.Id, item.Name));
-                });
-            });
-        
+        editUserViewModel.AvaiableStatuses.insertRange(service.getStatuses());
+        editUserViewModel.AvaiablePages().insertRange(service.getPages());
         navigateManager.OpenInNewWindow(editUserViewModel);
     };
     self.GoToEditUserCommand = function (newUser) {
@@ -81,4 +33,4 @@ var EditUserViewModel = function (user) {
     self.RemoveUserCommand = function () {
         alert('RemoveUserCommand');
     };
-}
+};

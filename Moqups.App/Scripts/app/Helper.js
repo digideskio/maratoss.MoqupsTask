@@ -1,4 +1,10 @@
-﻿function fillData(model) {
+﻿Array.prototype.insertRange = function (arr) {
+    for (var i = 0; i < arr.length; i++) {
+        this.push(arr[i]);
+    }
+};
+
+function fillData(model) {
     for (var i = 0; i < 10; i++) {
         var user = new User(i, 'fName: ' + i, 'lName: ' + i);
         user.Pages.push(new Page(1, 'Page 1'));
@@ -14,8 +20,9 @@
 var NavigateManager = function () {
     var self = this;
     self.OpenInNewWindow = function (viewModel, contract) {
-        //todo: download view and bind viewmodel
+        //todo: resolve view and bind to viewmodel
         var view = $('#dialog');
+        ko.cleanNode(view[0]);
         $.ajax({
             type: "POST",
             url: 'Home/GetAddForm',
@@ -35,7 +42,7 @@ var NavigateManager = function () {
             }
         });
     };
-    self.RegisterView = function (view, viewModel, contract) {
+    self.RegisterView = function (viewUrl, viewModel, contract) {
         //todo: register view and viewmodel
     };
 };
