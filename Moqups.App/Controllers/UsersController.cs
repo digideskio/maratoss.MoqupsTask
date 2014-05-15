@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Web.Http;
+using System.Web.Mvc;
+using Moqups.App.Helpers;
 using Moqups.BL.Infrastructure;
 using Moqups.Entities;
 
@@ -15,6 +17,12 @@ namespace Moqups.App.Controllers
         public UsersController(IUserService userService)
         {
             _userService = userService;
+        }
+
+        public User Add(User user)
+        {
+            user.Id++;
+            return user;
         }
 
         public IEnumerable<User> GetAllUsers()

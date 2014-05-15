@@ -14,6 +14,7 @@
         });
         return pages;
     };
+    
     this.getStatuses = function () {
         var statuses = [];
         $.ajax({
@@ -28,5 +29,16 @@
             async: false
         });
         return statuses;
+    };
+    
+    this.addUser = function (user, callback, errorCallback) {
+        $.ajax({
+            type: 'POST',
+            url: 'api/users',
+            dataType: 'json',
+            success: callback,
+            error: errorCallback,
+            data: user
+        });
     };
 }

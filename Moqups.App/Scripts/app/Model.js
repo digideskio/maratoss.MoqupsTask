@@ -25,7 +25,9 @@ var EditUserViewModel = function (user) {
     self.AvaiablePages = ko.observableArray();
     self.AvaiableStatuses = [];
     self.AddUserCommand = function () {
-        alert('AddUserCommand');
+        new Service().addUser(User(), null, function(err) {
+            alert(err.responseText);
+        });
     };
     self.EditUserCommand = function () {
         alert('EditUserCommand');

@@ -249,8 +249,10 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="IndexSPA.html" />
+    <Content Include="Scripts\app\Entities.js" />
     <Content Include="Scripts\app\Helper.js" />
     <Content Include="Scripts\app\Model.js" />
+    <Content Include="Scripts\app\Service.js" />
     <Content Include="Scripts\knockout-3.1.0.debug.js" />
     <Content Include="Scripts\knockout-3.1.0.js" />
     <Content Include="Scripts\sammy-0.7.4.js" />
