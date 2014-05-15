@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Web.Http;
-using System.Web.Mvc;
-using Moqups.App.Helpers;
 using Moqups.BL.Infrastructure;
 using Moqups.Entities;
 
