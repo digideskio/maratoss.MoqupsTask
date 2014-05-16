@@ -19,7 +19,7 @@ var NavigateManager = function (jqScreen, viewFactory) {
     self.GoBack = function () {
         // todo: go back;
         unbind();
-        jqScreen.hide();
+        jqScreen[0].dialog('close');
     };
 
     var openWindow = function (view, title) {

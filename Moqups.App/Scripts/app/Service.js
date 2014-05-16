@@ -34,11 +34,13 @@
     this.addUser = function (user, callback, errorCallback) {
         $.ajax({
             type: 'POST',
-            url: 'api/users',
+            url: 'Home/SaveOrUpdateAjax',
+            //url: 'api/users',
             dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
             success: callback,
             error: errorCallback,
-            data: user
+            data: { 'Firstname': 'asdasd', 'Lastname': 'zzzzzzzz' }
         });
     };
 

@@ -19,6 +19,7 @@ var UserViewModel = function (navigateManager, service) {
 var EditUserViewModel = function (user, service, navigationManager) {
     var self = this;
 
+    self.IsBusy = ko.observable(false);
     self.User = ko.observable(user);
     self.AvaiablePages = service.getPages();
     self.AvaiableStatuses = service.getStatuses();
