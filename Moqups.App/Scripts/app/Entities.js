@@ -22,10 +22,3 @@ var Status = function (id, value) {
     self.Id = id;
     self.Value = value;
 };
-
-User.prototype.toJson = function() {
-    return {
-        'Firstname': this.Firstname(),
-        'Lastname': this.Lastname()
-    };
-};

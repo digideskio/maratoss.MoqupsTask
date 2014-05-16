@@ -16,39 +16,3 @@ function fillData(model) {
         }
     }
 }
-
-var NavigateManager = function () {
-    var self = this;
-    self.OpenInNewWindow = function (viewModel, contract) {
-        //todo: resolve view and bind to viewmodel
-        var view = $('#dialog');
-        ko.cleanNode(view[0]);
-        $.ajax({
-            type: "POST",
-            url: 'Home/GetAddForm',
-            error: function (data) {
-                view.html(data.responseText);
-                //alert(data.responseText);
-            },
-            success: function (data) {
-                view.html(data);
-                view.dialog({
-                    modal: true,
-                    title: 'some title',
-                    width: 350
-                });
-                ko.applyBindings(viewModel, view[0]);
-                view.dialog();
-            }
-        });
-    };
-    self.RegisterView = function (viewUrl, viewModel, contract) {
-        //todo: register view and viewmodel
-    };
-};
-
-function getType(val) {
-    if (typeof val === 'undefined') return 'undefined';
-    if (typeof val === 'object' && !val) return 'null';
-    return ({}).toString.call(val).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
-}

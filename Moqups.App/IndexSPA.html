@@ -13,15 +13,11 @@
     <script src="Scripts/app/Helper.js"></script>
     <script src="Scripts/app/Service.js"></script>
     <script src="Scripts/app/Entities.js"></script>
+    <script src="Scripts/app/NavigationManager.js"></script>
+    <script src="Scripts/app/Bootstrapper.js"></script>
     
     <script>
         $(function () {
-            var navigateManager = new NavigateManager();
-            //navigateManager.RegisterView();
-
-            var model = new UserViewModel(navigateManager);
-            fillData(model);
-            ko.applyBindings(model);
         });
     </script>
 </head>

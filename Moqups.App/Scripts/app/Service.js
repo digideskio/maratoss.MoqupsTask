@@ -35,14 +35,10 @@
         $.ajax({
             type: 'POST',
             url: 'api/users',
-            contentType: "application/json; charset=utf-8",
             dataType: 'json',
             success: callback,
             error: errorCallback,
-            data: {
-                'Firstname': user.Firstname(),
-                'Lastname': user.Lastname()
-            }
+            data: user
         });
     };
 }
