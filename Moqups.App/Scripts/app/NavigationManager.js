@@ -1,5 +1,5 @@
 ﻿// todo: need refactor
-var NavigateManager = function (jqScreen, viewFactory) {
+var NavigateManager = function (screen, viewFactory) {
     var currentViewModel;
 
     var self = this;
@@ -13,32 +13,26 @@ var NavigateManager = function (jqScreen, viewFactory) {
 
         currentViewModel = viewModel;
         openWindow(view);
-        ko.applyBindings(viewModel, jqScreen[0]);
+        ko.applyBindings(viewModel, screen.Get());
     };
 
     self.GoBack = function () {
         // todo: go back;
         unbind();
-        jqScreen[0].dialog('close');
+        screen.Close();
     };
 
     var openWindow = function (view, title) {
-        if (jqScreen === null) {
+        if (screen === null) {
             throw "screen is null";
         }
 
-        jqScreen.html(view);
-        jqScreen.dialog({
-            modal: true,
-            title: 'some title',
-            width: 350
-        });
+        screen.SetContent(view);
+        screen.Open();
     };
 
     var unbind = function () {
-        if (jqScreen[0] !== null) {
-            ko.cleanNode(jqScreen[0]);
-        }
+        ko.cleanNode(screen.Get());
     };
 
     var resolveView = function (url, contract) {

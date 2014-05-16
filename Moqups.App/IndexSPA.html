@@ -2,10 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link href="/Content/themes/base/jquery-ui.css" rel="stylesheet"/>
-    <link href="/Content/themes/base/jquery.ui.all.css" rel="stylesheet"/>
 
-    <script src="Scripts/jquery-1.8.2.min.js"></script>
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/bootstrap-theme.min.css" />
+    <link href="/Content/bootstrap-responsive.css" rel="stylesheet">
+
+    <script src="Scripts/jquery-1.9.1.min.js"></script>
     <script src="/Scripts/jquery-ui-1.10.4.min.js"></script>
     <script src="Scripts/knockout-3.1.0.js"></script>
     <script src="Scripts/sammy-0.7.4.js"></script>
@@ -15,39 +17,59 @@
     <script src="Scripts/app/Entities.js"></script>
     <script src="Scripts/app/NavigationManager.js"></script>
     <script src="Scripts/app/Bootstrapper.js"></script>
-    
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/bootstrap-modal.js"></script>
+    <script src="Scripts/bootstrap-transition.js"></script>
+
     <script>
-        $(function () {
-        });
+//        $(document).ready(function ($) {
+//            $('#basicModal').modal();
+//        });
     </script>
 </head>
-    <body>
-        
-        <div id="dialog">
-        </div>
+<body>
 
-        <button data-bind="click: GoToAddUserCommand">Add</button>
-        <table>
-            <thead>
-                <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Status</th>
-                    <th>Is admin</th>
-                    <th>Pages</th>
-                </tr>
-            </thead>
-            <tbody data-bind="foreach: Users">
-                <tr>
-                    <td><span data-bind="text: Firstname" /></td>
-                    <td><span data-bind="text: Lastname" /></td>
-                    <td><span data-bind="text: Status" /></td>
-                    <td><input type="checkbox" data-bind="checked: IsAdmin" disabled="disabled" /></td>
-                    <!-- ko foreach: Pages -->
-                    <td data-bind="text: $data.Name"> </td>
-                    <!-- /ko -->
-                </tr>
-            </tbody>
-        </table>
-    </body>
+    <div class="modal fade" id="basicModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal">x</button>
+                    <h4 class="modal-title" id="myModalLabel">Название модального окна</h4>
+                </div>
+                <div class="modal-body">
+                    <h3>Содержимое модального окна</h3>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button>
+                    <button class="btn btn-primary" type="button">Сохранить изменения</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button data-bind="click: GoToAddUserCommand">Add</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Status</th>
+                <th>Is admin</th>
+                <th>Pages</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: Users">
+            <tr>
+                <td><span data-bind="text: Firstname" /></td>
+                <td><span data-bind="text: Lastname" /></td>
+                <td><span data-bind="text: Status" /></td>
+                <td>
+                    <input type="checkbox" data-bind="checked: IsAdmin" disabled="disabled" /></td>
+                <!-- ko foreach: Pages -->
+                <td data-bind="text: $data.Name"></td>
+                <!-- /ko -->
+            </tr>
+        </tbody>
+    </table>
+</body>
 </html>
