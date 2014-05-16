@@ -14,7 +14,7 @@
         });
         return pages;
     };
-    
+
     this.getStatuses = function () {
         var statuses = [];
         $.ajax({
@@ -30,7 +30,7 @@
         });
         return statuses;
     };
-    
+
     this.addUser = function (user, callback, errorCallback) {
         $.ajax({
             type: 'POST',
@@ -40,5 +40,23 @@
             error: errorCallback,
             data: user
         });
+    };
+
+    this.loadForm = function (url) {
+        var view;
+        $.ajax({
+            type: "POST",
+            url: url,
+            error: function (data) {
+                //screen.html(data.responseText);
+                alert(data.responseText);
+            },
+            success: function (data) {
+                view = data;
+            },
+            async: false
+        });
+
+        return view;
     };
 }

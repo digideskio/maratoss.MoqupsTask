@@ -1,7 +1,7 @@
 ﻿$(function () {
-    var navigateManager = new NavigateManager($('#dialog'));
-    //navigateManager.RegisterView('Home/GetAddForm', 'EditUserViewModel');
     var service = new Service();
+    var navigateManager = new NavigateManager($('#dialog'), service);
+    //navigateManager.RegisterView('Home/GetAddForm', 'EditUserViewModel');
 
     var model = new UserViewModel(navigateManager, service);
     fillData(model);
