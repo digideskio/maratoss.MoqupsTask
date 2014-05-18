@@ -7,7 +7,7 @@
         navigateManager.OpenInNewWindow(ADD_FORM, editUserViewModel);
     };
     self.GoToEditUserCommand = function (user) {
-        var editUserViewModel = new EditUserViewModel(user, service, navigateManager);
+        var editUserViewModel = new EditUserViewModel(createUserFrom(user), service, navigateManager);
         navigateManager.OpenInNewWindow(ADD_FORM, editUserViewModel);
     };
 };
