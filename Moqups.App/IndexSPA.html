@@ -17,17 +17,18 @@
     <script src="Scripts/app/Service.js"></script>
     <script src="Scripts/app/Entities.js"></script>
     <script src="Scripts/app/NavigationManager.js"></script>
+    <script src="Scripts/app/Window.js"></script>
     <script src="Scripts/app/Bootstrapper.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/bootstrap-modal.js"></script>
     <script src="Scripts/bootstrap-transition.js"></script>
     <script src="Scripts/lodash.min.js"></script>
-    <script src="Scripts/postal.min.js"></script>
+    <script src="Scripts/postal.js"></script>
 
     <script>
-//        $(document).ready(function ($) {
-//            $('#basicModal').modal();
-//        });
+        //        $(document).ready(function ($) {
+        //            $('#basicModal').modal();
+        //        });
     </script>
 </head>
 <body>
@@ -40,7 +41,6 @@
                     <h4 class="modal-title" id="myModalLabel">Название модального окна</h4>
                 </div>
                 <div id="modalBody" class="modal-body">
-                    <h3>Содержимое модального окна</h3>
                 </div>
                 <div class="modal-footer">
                 </div>
@@ -49,7 +49,7 @@
     </div>
 
     <button data-bind="click: GoToAddUserCommand">Add</button>
-    <table>
+    <table class="table table-hover table-condensed table-striped">
         <thead>
             <tr>
                 <th>Firstname</th>
@@ -60,15 +60,17 @@
             </tr>
         </thead>
         <tbody data-bind="foreach: Users">
-            <tr>
+            <tr style="cursor:pointer;" data-bind="event: { dblclick: $root.GoToEditUserCommand }">
                 <td><span data-bind="text: Firstname" /></td>
                 <td><span data-bind="text: Lastname" /></td>
                 <td><span data-bind="text: Status" /></td>
                 <td>
                     <input type="checkbox" data-bind="checked: IsAdmin" disabled="disabled" /></td>
-                <!-- ko foreach: Pages -->
-                <td data-bind="text: $data.Name"></td>
-                <!-- /ko -->
+                <td>
+                    <!-- ko foreach: Pages -->
+                    <span data-bind="text: $data.Name"></span>
+                    <!-- /ko -->
+                </td>
             </tr>
         </tbody>
     </table>

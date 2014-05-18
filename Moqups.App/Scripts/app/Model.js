@@ -7,7 +7,8 @@
         navigateManager.OpenInNewWindow(ADD_FORM, editUserViewModel);
     };
     self.GoToEditUserCommand = function (user) {
-        alert('GoToEditUserCommand');
+        var editUserViewModel = new EditUserViewModel(user, service, navigateManager);
+        navigateManager.OpenInNewWindow(ADD_FORM, editUserViewModel);
     };
     self.DeleteUserCommand = function (id) {
         alert('DeleteUserCommand');
@@ -23,7 +24,7 @@ var EditUserViewModel = function (user, service, navigationManager) {
     self.AvaiableStatuses = service.getStatuses();
     self.AddUserCommand = function () {
         self.IsBusy(true);
-        service.addUser(self.User(), addedIsSuccessfull, onError, addComplete);
+        service.addUser(self.User(), addedIsSuccessful, onError, addComplete);
     };
     self.CancelCommand = function () {
         navigationManager.GoBack();
@@ -32,9 +33,12 @@ var EditUserViewModel = function (user, service, navigationManager) {
         alert('RemoveUserCommand');
     };
 
-    var addedIsSuccessfull = function (addedUser) {
-        alert('OK');
-        postal.channel(GLOBAL_CHANNEL, USER_WAS_ADDED).publish(addedUser);
+    var addedIsSuccessful = function (addedUser) {
+        postal.publish({
+            topic: USER_WAS_ADDED,
+            data: addedUser
+        });
+        navigationManager.GoBack();
     };
 
     var addComplete = function () {
