@@ -19,21 +19,6 @@ function fillData(model) {
     }
 }
 
-ko.bindingHandlers.clickAndStop = {
-    init: function (element, valueAccessor, allBindingsAccessor, viewModel, context) {
-        var handler = ko.utils.unwrapObservable(valueAccessor()),
-            newValueAccessor = function () {
-                return function (data, event) {
-                    handler.call(viewModel, data, event);
-                    event.cancelBubble = true;
-                    if (event.stopPropagation) event.stopPropagation();
-                };
-            };
-
-        ko.bindingHandlers.click.init(element, newValueAccessor, allBindingsAccessor, viewModel, context);
-    }
-};
-
 function dropSource(item, viewModel) {
     viewModel.AvaiablePages.remove(item);
     viewModel.User().Pages.push(item);
@@ -50,3 +35,30 @@ Array.prototype.remove = function (item) {
         this.splice(index, 1);
     }
 };
+
+Array.prototype.remove = function (array) {
+    for (var i = 0; i < array.length; i++) {
+        this.remove(array[i]);
+    }
+};
+
+function exceptPage(sourcePages, secondPages) {
+    for (var i = 0; i < secondPages.length; i++) {
+        var index = indexPageOf(sourcePages, secondPages[i]);
+        if (index > -1) {
+            sourcePages.splice(index, 1);
+        }
+    }
+
+    return sourcePages;
+}
+
+function indexPageOf(arr, page) {
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i].Id === page.Id) {
+            return i;
+        }
+    }
+    
+    return -1;
+}

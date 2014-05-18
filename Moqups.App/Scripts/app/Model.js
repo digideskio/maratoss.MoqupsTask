@@ -10,9 +10,6 @@
         var editUserViewModel = new EditUserViewModel(user, service, navigateManager);
         navigateManager.OpenInNewWindow(ADD_FORM, editUserViewModel);
     };
-    self.DeleteUserCommand = function (id) {
-        alert('DeleteUserCommand');
-    };
 };
 
 var EditUserViewModel = function (user, service, navigationManager) {
@@ -20,7 +17,7 @@ var EditUserViewModel = function (user, service, navigationManager) {
 
     self.IsBusy = ko.observable(false);
     self.User = ko.observable(user);
-    self.AvaiablePages = ko.observableArray(service.getPages());
+    self.AvaiablePages = ko.observableArray(exceptPage(service.getPages(), user.Pages()));
     self.AvaiableStatuses = ko.observableArray(service.getStatuses());
     self.AddUserCommand = function () {
         self.IsBusy(true);

@@ -9,6 +9,15 @@
     self.Pages = ko.observableArray();
 };
 
+User.prototype.createUser = function (user) {
+    this.Id = user.Id;
+    this.Firstname = ko.observable(user.Firstname());
+    this.Lastname = ko.observable(user.Lastname());
+    this.Status = ko.observable(user.Status());
+    this.IsAdmin = ko.observable(user.IsAdmin());
+    this.Pages = ko.observableArray(user.Pages);
+};
+
 User.prototype.toString = function() {
     return this.Firstname() + " " + this.Lastname();
 };

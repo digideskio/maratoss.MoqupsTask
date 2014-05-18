@@ -16,12 +16,12 @@
     <select data-bind="options: AvaiableStatuses, selectedOptions: User().Status, value: User().Status, optionsText: 'Value'"></select><br />
 
     Pages:
-    <div data-bind="foreach: User().Pages, dropZone: { accepts: 'target', drop: function (data, model) { dropSource(data, model); } }" style="border: red solid 1px; padding: 5px;">
+    <div data-bind="foreach: User().Pages, dropZone: { accepts: 'target', drop: function (data, model) { dropSource(data, model); } }" style="border: red solid 1px; padding: 5px; min-height: 100px;">
         <p style="cursor: move" data-bind="text: $data.Name, dragZone: { name: 'source' }"></p>
     </div>
 
     Available pages:
-    <div data-bind="foreach: AvaiablePages, dropZone: { accepts: 'source', drop: function (data, model) { dropTarget(data, model); } }" style="border: red solid 1px; padding: 5px;">
+    <div data-bind="foreach: AvaiablePages, dropZone: { accepts: 'source', drop: function (data, model) { dropTarget(data, model); } }" style="border: red solid 1px; padding: 5px; min-height: 100px;">
         <p style="cursor: move" data-bind="text: $data.Name, dragZone: { name: 'target' }"></p>
     </div>
 
