@@ -38,3 +38,7 @@ var Status = function (id, value) {
     self.Id = id;
     self.Value = value;
 };
+
+Status.prototype.toString = function () {
+    return this.Value;
+};
