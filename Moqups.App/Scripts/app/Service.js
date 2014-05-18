@@ -31,16 +31,16 @@
         return statuses;
     };
 
-    this.addUser = function (user, callback, errorCallback) {
+    this.addUser = function (user, callback, errorCallback, finnaly) {
         $.ajax({
             type: 'POST',
-            url: 'Home/SaveOrUpdateAjax',
-            //url: 'api/users',
+            url: 'api/users',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: callback,
             error: errorCallback,
-            data: { 'Firstname': 'asdasd', 'Lastname': 'zzzzzzzz' }
+            complete: finnaly,
+            data: ko.toJSON(user)
         });
     };
 

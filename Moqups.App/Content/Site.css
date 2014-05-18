@@ -59,3 +59,24 @@ textarea {
 .validation-summary-valid {
     display: none;
 }
+
+#foreground {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    -ms-opacity: 0.3;
+    opacity: 0.3;
+    background: black;
+}
+
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 100px;
+    height: 100px;
+}

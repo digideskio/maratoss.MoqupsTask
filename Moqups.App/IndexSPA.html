@@ -3,6 +3,7 @@
 <head>
     <title></title>
 
+    <link href="/Content/Site.css" rel="stylesheet" />
     <link href="/Content/bootstrap.css" rel="stylesheet" />
     <link href="/Content/bootstrap-theme.min.css" />
     <link href="/Content/bootstrap-responsive.css" rel="stylesheet">
@@ -20,6 +21,8 @@
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/bootstrap-modal.js"></script>
     <script src="Scripts/bootstrap-transition.js"></script>
+    <script src="Scripts/lodash.min.js"></script>
+    <script src="Scripts/postal.min.js"></script>
 
     <script>
 //        $(document).ready(function ($) {
@@ -36,12 +39,10 @@
                     <button class="close" type="button" data-dismiss="modal">x</button>
                     <h4 class="modal-title" id="myModalLabel">Название модального окна</h4>
                 </div>
-                <div class="modal-body">
+                <div id="modalBody" class="modal-body">
                     <h3>Содержимое модального окна</h3>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button>
-                    <button class="btn btn-primary" type="button">Сохранить изменения</button>
                 </div>
             </div>
         </div>

@@ -33,6 +33,12 @@
     })();
 </script>
 
+<div id="foreground" data-bind="visible: IsBusy">
+    <div class="loading">
+        loading...
+    </div>
+</div>
+
 Firstname
 <input type="text" data-bind="value: User().Firstname" /><br />
 Lastname
@@ -53,7 +59,7 @@ Available pages:
     <br />
 </div>
 
-<button data-bind="click: AddUserCommand">Save</button>
-<button data-bind="click: CancelCommand">Cancel</button>
+<button class="btn btn-default" data-bind="click: AddUserCommand">Save</button>
+<button class="btn btn-default" data-dismiss="modal" data-bind="click: CancelCommand">Cancel</button>
 @*todo: если открыто на добавление то убрать кнопку удалить*@
-<button data-bind="click: RemoveUserCommand">Delete</button>
+<button class="btn btn-default" data-bind="click: RemoveUserCommand">Delete</button>

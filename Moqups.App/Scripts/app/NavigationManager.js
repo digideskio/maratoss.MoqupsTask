@@ -18,8 +18,8 @@ var NavigateManager = function (screen, viewFactory) {
 
     self.GoBack = function () {
         // todo: go back;
-        unbind();
         screen.Close();
+        unbind();
     };
 
     var openWindow = function (view, title) {

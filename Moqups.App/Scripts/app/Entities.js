@@ -9,6 +9,10 @@
     self.Pages = ko.observableArray();
 };
 
+User.prototype.toString = function() {
+    return this.Firstname() + " " + this.Lastname();
+};
+
 var Page = function (id, name) {
     var self = this;
 

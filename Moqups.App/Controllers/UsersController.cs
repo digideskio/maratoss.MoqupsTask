@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Threading;
 using System.Web.Http;
 using Moqups.BL.Infrastructure;
 using Moqups.Entities;
@@ -19,6 +20,11 @@ namespace Moqups.App.Controllers
 
         public User Add(User user)
         {
+            Thread.Sleep(1000);
+            if (user == null) {
+                return new NullUser();
+            }
+
             user.Id++;
             return user;
         }
@@ -65,5 +71,14 @@ namespace Moqups.App.Controllers
     {
         public int Id { get; set; }
         public string Value { get; set; }
+    }
+
+    public class NullUser : User
+    {
+        public NullUser()
+        {
+            Firstname = "null";
+            Lastname = "null";
+        }
     }
 }
