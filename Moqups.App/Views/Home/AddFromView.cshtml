@@ -1,38 +1,5 @@
 ﻿<!--ViewModel: EditUserViewModel -->
 
-<script>
-    (function () {
-        var _dragged;
-        ko.bindingHandlers.drag = {
-            init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-                var dragElement = $(element);
-                var dragOptions = {
-                    helper: 'clone',
-                    revert: true,
-                    revertDuration: 0,
-                    start: function () {
-                        _dragged = ko.utils.unwrapObservable(valueAccessor().value);
-                    },
-                    cursor: 'default'
-                };
-                dragElement.draggable(dragOptions).disableSelection();
-            }
-        };
-
-        ko.bindingHandlers.drop = {
-            init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-                var dropElement = $(element);
-                var dropOptions = {
-                    drop: function (event, ui) {
-                        valueAccessor().value(_dragged);
-                    }
-                };
-                dropElement.droppable(dropOptions);
-            }
-        };
-    })();
-</script>
-
 <div id="foreground" data-bind="visible: IsBusy">
     <div class="loading">
         loading...
@@ -49,15 +16,13 @@
     <select data-bind="options: AvaiableStatuses, selectedOptions: User().Status, value: User().Status, optionsText: 'Value'"></select><br />
 
     Pages:
-    <div data-bind="foreach: User().Pages, drop: { value: User().Pages }" style="border: red solid 1px;">
-        <div data-bind="text: $data.Name, drag: { value: $data }"></div>
-        <br />
+    <div data-bind="foreach: User().Pages, dropZone: { accepts: 'target', drop: function (data, model) { dropSource(data, model); } }" style="border: red solid 1px; padding: 5px;">
+        <p style="cursor: move" data-bind="text: $data.Name, dragZone: { name: 'source' }"></p>
     </div>
 
     Available pages:
-    <div data-bind="foreach: AvaiablePages, drop: { value: AvaiablePages }" style="border: red solid 1px">
-        <div data-bind="text: $data.Name, drag: { value: $data }"></div>
-        <br />
+    <div data-bind="foreach: AvaiablePages, dropZone: { accepts: 'source', drop: function (data, model) { dropTarget(data, model); } }" style="border: red solid 1px; padding: 5px;">
+        <p style="cursor: move" data-bind="text: $data.Name, dragZone: { name: 'target' }"></p>
     </div>
 
     <button class="btn btn-default" data-bind="click: AddUserCommand">Save</button>

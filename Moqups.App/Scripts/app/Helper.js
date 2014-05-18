@@ -12,6 +12,8 @@ function fillData(model) {
         model.Users.push(user);
 
         if (i % 2 == 0) {
+            user.IsAdmin(true);
+            user.Status(2);
             user.Pages.push(new Page(3, 'Page 3'));
         }
     }
@@ -29,5 +31,22 @@ ko.bindingHandlers.clickAndStop = {
             };
 
         ko.bindingHandlers.click.init(element, newValueAccessor, allBindingsAccessor, viewModel, context);
+    }
+};
+
+function dropSource(item, viewModel) {
+    viewModel.AvaiablePages.remove(item);
+    viewModel.User().Pages.push(item);
+}
+
+function dropTarget(item, viewModel) {
+    viewModel.AvaiablePages.push(item);
+    viewModel.User().Pages.remove(item);
+}
+
+Array.prototype.remove = function (item) {
+    var index = this.indexOf(item);
+    if (index > -1) {
+        this.splice(index, 1);
     }
 };

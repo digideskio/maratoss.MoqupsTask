@@ -20,8 +20,8 @@ var EditUserViewModel = function (user, service, navigationManager) {
 
     self.IsBusy = ko.observable(false);
     self.User = ko.observable(user);
-    self.AvaiablePages = service.getPages();
-    self.AvaiableStatuses = service.getStatuses();
+    self.AvaiablePages = ko.observableArray(service.getPages());
+    self.AvaiableStatuses = ko.observableArray(service.getStatuses());
     self.AddUserCommand = function () {
         self.IsBusy(true);
         service.addUser(self.User(), addedIsSuccessful, onError, addComplete);
