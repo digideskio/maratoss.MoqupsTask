@@ -1,5 +1,19 @@
 ﻿var Service = function () {
-    this.getPages = function () {
+    var self = this;
+    
+    self.getAllUsers = function (filter, callback, errorCallback, finnaly) {
+        $.ajax({
+            type: 'GET',
+            url: 'api/users',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: callback,
+            error: errorCallback,
+            complete: finnaly
+        });
+    };
+
+    self.getPages = function () {
         var pages = [];
         $.ajax({
             type: 'GET',
@@ -15,7 +29,7 @@
         return pages;
     };
 
-    this.getStatuses = function () {
+    self.getStatuses = function () {
         var statuses = [];
         $.ajax({
             type: 'GET',
@@ -31,7 +45,7 @@
         return statuses;
     };
 
-    this.addUser = function (user, callback, errorCallback, finnaly) {
+    self.addUser = function (user, callback, errorCallback, finnaly) {
         $.ajax({
             type: 'POST',
             url: 'api/users',
@@ -44,7 +58,7 @@
         });
     };
 
-    this.loadForm = function (url) {
+    self.loadForm = function (url) {
         var view;
         $.ajax({
             type: "POST",
@@ -60,5 +74,18 @@
         });
 
         return view;
+    };
+
+    self.DeleteUser = function (user, callback, errorCallback, finnaly) {
+        $.ajax({
+            type: 'DELETE',
+            url: 'api/users',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: callback,
+            error: errorCallback,
+            complete: finnaly,
+            data: { id: user.Id }
+        });
     };
 }

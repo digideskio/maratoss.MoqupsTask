@@ -26,8 +26,11 @@ var EditUserViewModel = function (user, service, navigationManager) {
     self.CancelCommand = function () {
         navigationManager.GoBack();
     };
-    self.RemoveUserCommand = function () {
-        alert('RemoveUserCommand');
+    self.RemoveUserCommand = function (deletingUser) {
+        self.IsBusy(true);
+        service.DeleteUser(deletingUser, null, onError, function() {
+            self.IsBusy(false);
+        });
     };
 
     var addedIsSuccessful = function (addedUser) {

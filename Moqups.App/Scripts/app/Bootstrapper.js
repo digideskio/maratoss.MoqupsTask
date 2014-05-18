@@ -9,7 +9,7 @@ $(function () {
     var navigateManager = new NavigateManager(screen, service);
 
     var model = new UserViewModel(navigateManager, service);
-    fillData(model);
+    InitModel(model, service);
     ko.applyBindings(model);
 
     postal.subscribe({

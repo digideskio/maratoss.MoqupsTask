@@ -26,6 +26,7 @@ namespace Moqups.App.Controllers
             }
 
             user.Id++;
+            user.Pages.Add(new Page(){Name = "Page1"});
             return user;
         }
 
@@ -33,6 +34,11 @@ namespace Moqups.App.Controllers
         {
             IList<User> users = _userService.GetUsers();
             return users;
+        }
+
+        public void Delete(long id)
+        {
+            _userService.Delete(id);
         }
     }
 
