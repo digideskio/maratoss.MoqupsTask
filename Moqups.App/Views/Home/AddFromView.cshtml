@@ -27,6 +27,5 @@
 
     <button class="btn btn-default" data-bind="click: AddUserCommand">Save</button>
     <button class="btn btn-default" data-dismiss="modal" data-bind="click: CancelCommand">Cancel</button>
-    @*todo: если открыто на добавление то убрать кнопку удалить*@
-    <button class="btn btn-default" data-bind="click: RemoveUserCommand">Delete</button>
+    <button class="btn btn-default" data-bind="click: RemoveUserCommand, visible: User().Id > 0">Delete</button>
 </form>

@@ -10,8 +10,16 @@ function InitModel(userViewModel, service) {
         for (var i = 0; i < data.length; i++) {
             var item = data[i];
             item.Status = getStatusById(statuses, item.Status);
+
+            var user = new User();
+            user.Id = item.Id;
+            user.Firstname = ko.observable(item.Firstname);
+            user.Lastname = ko.observable(item.Lastname);
+            user.Status = ko.observable(item.Status);
+            user.IsAdmin = ko.observable(item.IsAdmin);
+            user.Pages = ko.observableArray(item.Pages);
+            userViewModel.Users.push(user);
         }
-        userViewModel.Users(data);
     }, function (error) {
         alert(error.responseText);
     });
