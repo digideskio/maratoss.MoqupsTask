@@ -4,7 +4,7 @@
     self.Id = id;
     self.Firstname = ko.observable(fName);
     self.Lastname = ko.observable(lName);
-    self.Status = ko.observable(1);
+    self.Status = ko.observable(0);
     self.IsAdmin = ko.observable();
     self.Pages = ko.observableArray();
 };

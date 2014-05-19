@@ -5,11 +5,10 @@
 };
 
 function InitModel(userViewModel, service) {
-    var statuses = service.getStatuses();
     service.getAllUsers(null, function (data) {
         for (var i = 0; i < data.length; i++) {
             var item = data[i];
-            item.Status = getStatusById(statuses, item.Status);
+            item.Status = statusConverter.GetStatuseById(item.Status);
 
             var user = new User();
             user.Id = item.Id;

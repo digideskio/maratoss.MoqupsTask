@@ -1,0 +1,71 @@
+﻿@section head
+{
+    <link href="/Content/Site.css" rel="stylesheet" />
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/bootstrap-theme.min.css" />
+    <link href="/Content/bootstrap-responsive.css" rel="stylesheet">
+
+    <script src="/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="/Scripts/jquery-ui-1.10.4.min.js"></script>
+    <script src="/Scripts/knockout-3.1.0.js"></script>
+    <script src="/Scripts/sammy-0.7.4.js"></script>
+    <script src="/Scripts/app/Model.js"></script>
+    <script src="/Scripts/app/Helper.js"></script>
+    <script src="/Scripts/app/Service.js"></script>
+    <script src="/Scripts/app/Entities.js"></script>
+    <script src="/Scripts/app/NavigationManager.js"></script>
+    <script src="/Scripts/app/Window.js"></script>
+    <script src="/Scripts/app/Bootstrapper.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/bootstrap-modal.js"></script>
+    <script src="/Scripts/bootstrap-transition.js"></script>
+    <script src="/Scripts/lodash.min.js"></script>
+    <script src="/Scripts/postal.js"></script>
+    <script src="/Scripts/knockout.dragdrop.js"></script>
+}
+
+@section scripts
+{
+}
+
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal">x</button>
+                <h4 class="modal-title" id="myModalLabel">Название модального окна</h4>
+            </div>
+            <div id="modalBody" class="modal-body">
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<button data-bind="click: GoToAddUserCommand">Add</button>
+<table class="table table-hover table-condensed table-striped">
+    <thead>
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Status</th>
+            <th>Is admin</th>
+            <th>Pages</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: Users">
+        <tr style="cursor: pointer;" data-bind="event: { dblclick: $root.GoToEditUserCommand }">
+            <td><span data-bind="text: Firstname" /></td>
+            <td><span data-bind="text: Lastname" /></td>
+            <td><span data-bind="text: Status" /></td>
+            <td>
+                <input type="checkbox" data-bind="checked: IsAdmin" disabled="disabled" /></td>
+            <td>
+                <!-- ko foreach: Pages -->
+                <span data-bind="text: $data.Name"></span>
+                <!-- /ko -->
+            </td>
+        </tr>
+    </tbody>
+</table>

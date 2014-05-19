@@ -27,22 +27,26 @@ namespace Moqups.App.Controllers
 
         public ActionResult Index()
         {
+            //IList<User> users = _userService.GetUsers();
+            //return View(users);
             IList<User> users = _userService.GetUsers();
-            return View(users);
+            return View("IndexSPA", users);
         }
 
         public ActionResult DetailsUser(long id)
         {
             User user = id == 0 ? new User() : _userService.GetUserById(id);
 
-            if (user == null) {
+            if (user == null)
+            {
                 throw new RecordIsNotFoundException(string.Format("The user with id#{0} not found", id));
             }
 
             IList<Page> availablePages = _userService.GetAvailablePages();
 
             var model = new EditUserModel(user, availablePages.Except(user.Pages).ToList());
-            if (Request.IsAjaxRequest()) {
+            if (Request.IsAjaxRequest())
+            {
                 return PartialView("AddOrEditUserForm", model);
             }
 

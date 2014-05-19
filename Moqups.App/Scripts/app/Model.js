@@ -18,7 +18,7 @@ var EditUserViewModel = function (user, service, navigationManager) {
     self.IsBusy = ko.observable(false);
     self.User = ko.observable(user);
     self.AvaiablePages = ko.observableArray(exceptPage(service.getPages(), user.Pages()));
-    self.AvaiableStatuses = ko.observableArray(service.getStatuses());
+    self.AvaiableStatuses = ko.observableArray(statusConverter.GetStatuses());
     self.AddUserCommand = function () {
         self.IsBusy(true);
         service.addUser(self.User(), addedIsSuccessful, onError, addComplete);
@@ -28,7 +28,7 @@ var EditUserViewModel = function (user, service, navigationManager) {
     };
     self.RemoveUserCommand = function (deletingUser) {
         self.IsBusy(true);
-        service.DeleteUser(deletingUser, null, onError, function() {
+        service.DeleteUser(deletingUser, null, onError, function () {
             self.IsBusy(false);
         });
     };

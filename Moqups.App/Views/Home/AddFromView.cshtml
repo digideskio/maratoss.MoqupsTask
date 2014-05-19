@@ -7,21 +7,29 @@
 </div>
 
 <form class="form-horizontal">
-    Firstname
-    <input type="text" data-bind="value: User().Firstname"/><br />
-    Lastname
-    <input type="text" data-bind="value: User().Lastname" /><br />
-    <input type="checkbox" data-bind="checked: User().IsAdmin" />IsAdmin<br />
-    Status
-    <select data-bind="options: AvaiableStatuses, selectedOptions: User().Status, value: User().Status, optionsText: 'Value'"></select><br />
+    <div data-bind="with: User">
+        Firstname
+    <input type="text" data-bind="value: Firstname" /><br />
+        Lastname
+    <input type="text" data-bind="value: Lastname" /><br />
+        <input type="checkbox" data-bind="checked: IsAdmin" />IsAdmin<br />
+        Status
+        <select data-bind="options: $root.AvaiableStatuses,
+                           selectedOptions: Status,
+                           optionText: 'Value',
+                           optionValue: 'Id',
+                           value: Status">
+        </select>
+    </div>
+    <br />
 
     Pages:
-    <div data-bind="foreach: User().Pages, dropZone: { accepts: 'target', drop: function (data, model) { dropSource(data, model); } }" style="border: red solid 1px; padding: 5px; min-height: 100px;">
+    <div data-bind="foreach: User().Pages, dropZone: { accepts: 'target', drop: function (data, model) { dropSource(data, model); } }" style="border: gray solid 1px; padding: 5px; min-height: 100px;">
         <p style="cursor: move" data-bind="text: $data.Name, dragZone: { name: 'source' }"></p>
     </div>
 
     Available pages:
-    <div data-bind="foreach: AvaiablePages, dropZone: { accepts: 'source', drop: function (data, model) { dropTarget(data, model); } }" style="border: red solid 1px; padding: 5px; min-height: 100px;">
+    <div data-bind="foreach: AvaiablePages, dropZone: { accepts: 'source', drop: function (data, model) { dropTarget(data, model); } }" style="border: gray solid 1px; padding: 5px; min-height: 100px;">
         <p style="cursor: move" data-bind="text: $data.Name, dragZone: { name: 'target' }"></p>
     </div>
 

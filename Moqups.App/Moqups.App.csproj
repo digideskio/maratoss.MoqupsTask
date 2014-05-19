@@ -256,7 +256,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="IndexSPA.html" />
+    <None Include="Views\Home\IndexSPA.cshtml" />
     <Content Include="Scripts\app\Bootstrapper.js" />
     <Content Include="Scripts\app\Entities.js" />
     <Content Include="Scripts\app\Helper.js" />

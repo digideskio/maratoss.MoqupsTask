@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Threading;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using Moqups.BL.Infrastructure;
 using Moqups.Entities;
@@ -18,16 +19,12 @@ namespace Moqups.App.Controllers
             _userService = userService;
         }
 
-        public User Add(User user)
+        public HttpResponseMessage Add(User user)
         {
-            Thread.Sleep(1000);
-            if (user == null) {
-                return new NullUser();
-            }
+            User newUser = _userService.SaveOrUpdate(user);
+            var response = Request.CreateResponse(HttpStatusCode.Created, newUser);
 
-            user.Id++;
-            user.Pages.Add(new Page(){Name = "Page1"});
-            return user;
+            return response;
         }
 
         public IEnumerable<User> GetAllUsers()
