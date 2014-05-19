@@ -14,20 +14,21 @@ var Service = function () {
         });
     };
 
-    self.getPages = function () {
-        var pages = [];
+    self.getPages = function (callback, errorCallback, finnaly) {
         $.ajax({
             type: 'GET',
             url: 'api/pages',
             dataType: 'json',
+            complete: finnaly,
+            error: errorCallback,
             success: function (data) {
+                var pages = [];
                 $.each(data, function (key, item) {
                     pages.push(new Page(item.Id, item.Name));
                 });
-            },
-            async: false
+                callback(pages);
+            }
         });
-        return pages;
     };
 
     self.getStatuses = function () {

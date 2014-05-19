@@ -1,6 +1,7 @@
 ﻿var UserViewModel = function (navigateManager, service) {
     var self = this;
 
+    self.IsBusy = ko.observable(false);
     self.Users = ko.observableArray();
     self.GoToAddUserCommand = function () {
         var editUserViewModel = new EditUserViewModel(new User(), service, navigateManager);
@@ -9,6 +10,10 @@
     self.GoToEditUserCommand = function (user) {
         var editUserViewModel = new EditUserViewModel(createUserFrom(user), service, navigateManager);
         navigateManager.OpenInNewWindow(ADD_FORM, editUserViewModel, "EDIT USER");
+    };
+
+    var createEditModel = function(user) {
+        return new EditUserViewModel(user, service, navigateManager);
     };
 
     // message bus

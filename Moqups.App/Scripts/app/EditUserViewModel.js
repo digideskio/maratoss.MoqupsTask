@@ -1,14 +1,23 @@
 ﻿var EditUserViewModel = function (user, service, navigationManager) {
     var self = this;
 
-    self.IsBusy = ko.observable(false);
+    self.IsBusy = ko.observable(true);
     self.User = ko.observable(user);
-    self.AvaiablePages = ko.observableArray(exceptPage(service.getPages(), user.Pages()));
+    self.AvaiablePages = ko.observableArray();
     self.AvaiableStatuses = ko.observableArray(statusConverter.GetStatuses());
-    
+
+    service.getPages(function (pages) {
+        self.AvaiablePages(exceptPage(pages, user.Pages()));
+    }, function (err) {
+        onError(err);
+        navigationManager.GoBack();
+    }, function () {
+        self.IsBusy(false);
+    });
+
     self.SaveUserCommand = function () {
         self.IsBusy(true);
-        service.SaveOrUpdateUser(self.User(), saveOrUpdateIsSuccessful, onError, function() {
+        service.SaveOrUpdateUser(self.User(), saveOrUpdateIsSuccessful, onError, function () {
             self.IsBusy(false);
         });
     };
@@ -44,4 +53,5 @@
     var onError = function (err) {
         alert(err.responseText);
     };
+
 };
