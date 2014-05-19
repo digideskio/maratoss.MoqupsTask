@@ -1,8 +1,6 @@
 ﻿var USER_WAS_ADDED = 'USER_WAS_ADDED';
 var USER_WAS_MODIFY = 'USER_WAS_MODIFY';
 var USER_WAS_DELETED = 'USER_WAS_DELETED';
-var GLOBAL_CHANNEL = 'GLOBAL_CHANNEL';
-var USER_TOPIC = 'USER_TOPIC';
 var ADD_FORM = 'Home/GetAddForm';
 
 var StatusConvert = function () {

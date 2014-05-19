@@ -5,9 +5,12 @@
     self.User = ko.observable(user);
     self.AvaiablePages = ko.observableArray(exceptPage(service.getPages(), user.Pages()));
     self.AvaiableStatuses = ko.observableArray(statusConverter.GetStatuses());
+    
     self.SaveUserCommand = function () {
         self.IsBusy(true);
-        service.SaveOrUpdateUser(self.User(), saveOrUpdateIsSuccessful, onError, addComplete);
+        service.SaveOrUpdateUser(self.User(), saveOrUpdateIsSuccessful, onError, function() {
+            self.IsBusy(false);
+        });
     };
     self.CancelCommand = function () {
         navigationManager.GoBack();
@@ -36,10 +39,6 @@
             data: userData
         });
         navigationManager.GoBack();
-    };
-
-    var addComplete = function () {
-        self.IsBusy(false);
     };
 
     var onError = function (err) {

@@ -20,7 +20,13 @@
     };
 
     self.Open = function (title) {
-        header.html(title);
+        if (title !== null) {
+            self.SetTitle(title);
+        }
         window.modal('show');
+    };
+    
+    self.SetTitle = function (title) {
+        header.html(title);
     };
 };

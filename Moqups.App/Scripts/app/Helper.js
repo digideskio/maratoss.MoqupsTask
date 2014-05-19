@@ -1,10 +1,4 @@
-﻿Array.prototype.insertRange = function (arr) {
-    for (var i = 0; i < arr.length; i++) {
-        this.push(arr[i]);
-    }
-};
-
-function InitModel(userViewModel, service) {
+﻿function InitModel(userViewModel, service) {
     service.getAllUsers(null, function (data) {
         for (var i = 0; i < data.length; i++) {
             var item = data[i];
@@ -49,26 +43,6 @@ function dropTarget(item, viewModel) {
     viewModel.AvaiablePages.push(item);
     viewModel.User().Pages.remove(item);
 }
-
-Array.prototype.remove = function (item) {
-    var index = this.indexOf(item);
-    if (index > -1) {
-        this.splice(index, 1);
-    }
-};
-
-Array.prototype.removePage = function (item) {
-    var index = indexPageOf(this, item);
-    if (index > -1) {
-        this.splice(index, 1);
-    }
-};
-
-Array.prototype.remove = function (array) {
-    for (var i = 0; i < array.length; i++) {
-        this.remove(array[i]);
-    }
-};
 
 function exceptPage(sourcePages, secondPages) {
     for (var i = 0; i < secondPages.length; i++) {

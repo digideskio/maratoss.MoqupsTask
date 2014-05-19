@@ -1,4 +1,5 @@
-﻿var Service = function () {
+﻿// todo: need async
+var Service = function () {
     var self = this;
 
     self.getAllUsers = function (filter, callback, errorCallback, finnaly) {

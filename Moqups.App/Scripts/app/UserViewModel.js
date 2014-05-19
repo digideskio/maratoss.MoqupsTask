@@ -4,13 +4,14 @@
     self.Users = ko.observableArray();
     self.GoToAddUserCommand = function () {
         var editUserViewModel = new EditUserViewModel(new User(), service, navigateManager);
-        navigateManager.OpenInNewWindow(ADD_FORM, editUserViewModel, "Add user");
+        navigateManager.OpenInNewWindow(ADD_FORM, editUserViewModel, "ADD USER");
     };
     self.GoToEditUserCommand = function (user) {
         var editUserViewModel = new EditUserViewModel(createUserFrom(user), service, navigateManager);
-        navigateManager.OpenInNewWindow(ADD_FORM, editUserViewModel, "Edit user");
+        navigateManager.OpenInNewWindow(ADD_FORM, editUserViewModel, "EDIT USER");
     };
 
+    // message bus
     postal.subscribe({
         topic: USER_WAS_ADDED,
         callback: function (data) {

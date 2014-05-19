@@ -9,6 +9,20 @@
     self.Pages = ko.observableArray();
 };
 
+var Page = function (id, name) {
+    var self = this;
+
+    self.Id = id;
+    self.Name = name;
+};
+
+var Status = function (id, value) {
+    var self = this;
+
+    self.Id = id;
+    self.Value = value;
+};
+
 function createUserFrom(user) {
     var newUser = new User();
     newUser.Id = user.Id;
@@ -27,20 +41,6 @@ User.prototype.toString = function() {
 
 User.prototype.isCreated = function () {
     return this.Id > 0;
-};
-
-var Page = function (id, name) {
-    var self = this;
-
-    self.Id = id;
-    self.Name = name;
-};
-
-var Status = function (id, value) {
-    var self = this;
-
-    self.Id = id;
-    self.Value = value;
 };
 
 Status.prototype.toString = function () {

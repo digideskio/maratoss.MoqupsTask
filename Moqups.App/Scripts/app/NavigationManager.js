@@ -1,4 +1,4 @@
-﻿// todo: need refactor
+﻿// todo: need refactor. registerView(url, typeof someViewModel, someContract)
 var NavigateManager = function (screen, viewFactory) {
     var currentViewModel;
 
