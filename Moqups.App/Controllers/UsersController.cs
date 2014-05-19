@@ -25,7 +25,13 @@ namespace Moqups.App.Controllers
 
         public HttpResponseMessage SaveOrUpdate(User user)
         {
-            User newUser = _userService.SaveOrUpdate(user);
+            User newUser;
+            using (IUnitOfWork unitOfWork = _unitOfWorkFactory.Create())
+            {
+                newUser = _userService.SaveOrUpdate(user);
+                unitOfWork.Commit();
+            }
+
             var response = Request.CreateResponse(HttpStatusCode.Created, newUser);
 
             return response;
