@@ -46,8 +46,8 @@
     };
 
     self.addUser = function (user, callback, errorCallback, finnaly) {
-        user.Status = user.Status.Id;
-        var json = ko.toJSON(user);
+        var copyUser = createUserFrom(user);
+        copyUser.Status = copyUser.Status().Id;
         $.ajax({
             type: 'POST',
             url: 'api/users',
@@ -56,7 +56,7 @@
             success: callback,
             error: errorCallback,
             complete: finnaly,
-            data: json
+            data: ko.toJSON(copyUser)
         });
     };
 
@@ -81,13 +81,12 @@
     self.DeleteUser = function (user, callback, errorCallback, finnaly) {
         $.ajax({
             type: 'DELETE',
-            url: 'api/users',
+            url: 'api/users/' + user.Id,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: callback,
             error: errorCallback,
-            complete: finnaly,
-            data: { id: user.Id }
+            complete: finnaly
         });
     };
 }

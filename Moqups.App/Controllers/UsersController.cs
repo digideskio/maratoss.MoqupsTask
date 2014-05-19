@@ -3,7 +3,9 @@ using System.ComponentModel.Composition;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Mvc;
 using Moqups.BL.Infrastructure;
+using Moqups.Connection.Infrastructure;
 using Moqups.Entities;
 
 namespace Moqups.App.Controllers
@@ -11,11 +13,13 @@ namespace Moqups.App.Controllers
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class UsersController : ApiController
     {
+        private readonly IUnitOfWorkFactory _unitOfWorkFactory;
         private readonly IUserService _userService;
 
         [ImportingConstructor]
-        public UsersController(IUserService userService)
+        public UsersController(IUnitOfWorkFactory unitOfWorkFactory, IUserService userService)
         {
+            _unitOfWorkFactory = unitOfWorkFactory;
             _userService = userService;
         }
 
@@ -35,7 +39,11 @@ namespace Moqups.App.Controllers
 
         public void Delete(long id)
         {
-            _userService.Delete(id);
+            using (IUnitOfWork unitOfWork = _unitOfWorkFactory.Create())
+            {
+                _userService.Delete(id);
+                unitOfWork.Commit();
+            }
         }
     }
 
