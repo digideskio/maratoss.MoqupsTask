@@ -12,10 +12,6 @@
         navigateManager.OpenInNewWindow(ADD_FORM, editUserViewModel, "EDIT USER");
     };
 
-    var createEditModel = function(user) {
-        return new EditUserViewModel(user, service, navigateManager);
-    };
-
     // message bus
     postal.subscribe({
         topic: USER_WAS_ADDED,
