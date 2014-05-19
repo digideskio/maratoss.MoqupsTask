@@ -1,5 +1,11 @@
 ﻿<!--ViewModel: EditUserViewModel -->
 
+<script>
+    $(function() {
+
+    });
+</script>
+
 <div id="foreground" data-bind="visible: IsBusy">
     <div class="loading">
         loading...
@@ -9,10 +15,10 @@
 <form class="form-horizontal">
     <div data-bind="with: User">
         Firstname
-    <input type="text" data-bind="value: Firstname" /><br />
+        <input type="text" data-bind="value: Firstname }" /><br />
         Lastname
-    <input type="text" data-bind="value: Lastname" /><br />
-        <input type="checkbox" data-bind="checked: IsAdmin" />IsAdmin<br />
+        <input type="text" data-bind="value: Lastname }" /><br />
+        <input type="checkbox" data-bind="checked: IsAdmin" /> IsAdmin<br />
         Status
         <select data-bind="options: $root.AvaiableStatuses,
                            selectedOptions: Status,
@@ -24,16 +30,18 @@
     <br />
 
     Pages:
-    <div data-bind="foreach: User().Pages, dropZone: { accepts: 'target', drop: function (data, model) { dropSource(data, model); } }" style="border: gray solid 1px; padding: 5px; min-height: 100px;">
+    <div data-bind="foreach: User().Pages, dropZone: { accepts: 'target', drop: function (data, model) { dropSource(data, model); } }"
+         style="border: gray solid 1px; padding: 5px; min-height: 100px;">
         <p style="cursor: move" data-bind="text: $data.Name, dragZone: { name: 'source' }"></p>
     </div>
 
     Available pages:
-    <div data-bind="foreach: AvaiablePages, dropZone: { accepts: 'source', drop: function (data, model) { dropTarget(data, model); } }" style="border: gray solid 1px; padding: 5px; min-height: 100px;">
+    <div data-bind="foreach: AvaiablePages, dropZone: { accepts: 'source', drop: function (data, model) { dropTarget(data, model); } }" 
+         style="border: gray solid 1px; padding: 5px; min-height: 100px;">
         <p style="cursor: move" data-bind="text: $data.Name, dragZone: { name: 'target' }"></p>
     </div>
 
     <button class="btn btn-default" data-bind="click: SaveUserCommand">Save</button>
     <button class="btn btn-default" data-dismiss="modal" data-bind="click: CancelCommand">Cancel</button>
-    <button class="btn btn-default" data-bind="click: RemoveUserCommand, visible: User().Id > 0">Delete</button>
+    <button class="btn btn-default" data-bind="click: RemoveUserCommand, visible: User().isCreated()">Delete</button>
 </form>

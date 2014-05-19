@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
 using Moqups.BL.Infrastructure;
 using Moqups.Connection.Infrastructure;
 using Moqups.Entities;
@@ -56,14 +57,12 @@ namespace Moqups.App.Controllers
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
     public class StatusesController : ApiController
     {
-        // todo: universal
         public IEnumerable<StatusModel> GetStatuses()
         {
-            return new[] {
-                new StatusModel{ Id = 0, Value = "Married"},
-                new StatusModel{ Id = 1, Value = "Single"},
-                new StatusModel{ Id = 2, Value = "Divorced"}
-            };
+            var statuses = Enum.GetNames(typeof(Status));
+            return
+                statuses.Select(
+                    status => new StatusModel {Id = (int) Enum.Parse(typeof (Status), status), Value = status});
         }
     }
 
@@ -88,14 +87,5 @@ namespace Moqups.App.Controllers
     {
         public int Id { get; set; }
         public string Value { get; set; }
-    }
-
-    public class NullUser : User
-    {
-        public NullUser()
-        {
-            Firstname = "null";
-            Lastname = "null";
-        }
     }
 }

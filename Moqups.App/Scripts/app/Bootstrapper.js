@@ -29,9 +29,15 @@ var StatusConvert = function () {
     };
 };
 
+//var tooltipService = new TooltipService();
 var statusConverter = new StatusConvert();
 
 $(function () {
+    //tooltipService.Register('User.Firstname', 'enter firstname for add', 'ADD');
+    //tooltipService.Register('User.Firstname', 'enter firstname for edit', 'EDIT');
+    //tooltipService.Register('User.Lastname', 'enter Lastname for add', 'ADD');
+    //tooltipService.Register('User.Lastname', 'enter Lastname for edit', 'EDIT');
+
     var service = new Service();
     statusConverter.SetStatuses(service.getStatuses());
 
