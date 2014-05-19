@@ -1,6 +1,6 @@
 ﻿var Service = function () {
     var self = this;
-    
+
     self.getAllUsers = function (filter, callback, errorCallback, finnaly) {
         $.ajax({
             type: 'GET',
@@ -46,6 +46,8 @@
     };
 
     self.addUser = function (user, callback, errorCallback, finnaly) {
+        user.Status = user.Status.Id;
+        var json = ko.toJSON(user);
         $.ajax({
             type: 'POST',
             url: 'api/users',
@@ -54,7 +56,7 @@
             success: callback,
             error: errorCallback,
             complete: finnaly,
-            data: ko.toJSON(user)
+            data: json
         });
     };
 
