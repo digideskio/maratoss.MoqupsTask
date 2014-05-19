@@ -1,8 +1,10 @@
 ﻿<!--ViewModel: EditUserViewModel -->
 
+<script type="text/javascript" src="/Scripts/bootstrap-select.js"></script>
+<link rel="stylesheet" type="text/css" href="/Content/bootstrap-select.css">
+
 <script>
     $(function() {
-
     });
 </script>
 
@@ -13,14 +15,19 @@
 </div>
 
 <form class="form-horizontal">
-    <div data-bind="with: User">
-        Firstname
-        <input type="text" data-bind="value: Firstname" /><br />
-        Lastname
-        <input type="text" data-bind="value: Lastname" /><br />
+    <div data-bind="with: User" style="padding: 10px;">
+        <div class="form-group">
+            <label>Firstname</label>
+            <input type="email" class="form-control" data-bind="value: Firstname">
+        </div>
+        <div class="form-group">
+            <label>Lastname</label>
+            <input type="text" class="form-control" data-bind="value: Lastname">
+        </div>
         <input type="checkbox" data-bind="checked: IsAdmin" /> IsAdmin<br />
         Status
-        <select data-bind="options: $root.AvaiableStatuses,
+        <select class="selectpicker"
+                data-bind="options: $root.AvaiableStatuses,
                            selectedOptions: Status,
                            optionText: 'Value',
                            optionValue: 'Id',

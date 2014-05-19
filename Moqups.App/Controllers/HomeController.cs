@@ -2,7 +2,6 @@
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.UI.WebControls.WebParts;
 using Moqups.App.Exceptions;
 using Moqups.App.Helpers;
 using Moqups.App.Models;
@@ -27,10 +26,7 @@ namespace Moqups.App.Controllers
 
         public ActionResult Index()
         {
-            //IList<User> users = _userService.GetUsers();
-            //return View(users);
-            IList<User> users = _userService.GetUsers();
-            return View("IndexSPA", users);
+            return View("IndexSPA");
         }
 
         public ActionResult DetailsUser(long id)
