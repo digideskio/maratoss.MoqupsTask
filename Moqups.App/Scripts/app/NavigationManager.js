@@ -3,7 +3,7 @@ var NavigateManager = function (screen, viewFactory) {
     var currentViewModel;
 
     var self = this;
-    self.OpenInNewWindow = function (url, viewModel, contract) {
+    self.OpenInNewWindow = function (url, viewModel, title, contract) {
         unbind();
         //todo: resolve view and bind to viewmodel
         var view = resolveView(url, contract);
@@ -12,7 +12,7 @@ var NavigateManager = function (screen, viewFactory) {
         }
 
         currentViewModel = viewModel;
-        openWindow(view);
+        openWindow(view, title);
         ko.applyBindings(viewModel, screen.Get());
     };
 
@@ -28,7 +28,7 @@ var NavigateManager = function (screen, viewFactory) {
         }
 
         screen.SetContent(view);
-        screen.Open();
+        screen.Open(title);
     };
 
     var unbind = function () {

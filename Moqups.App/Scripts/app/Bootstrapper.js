@@ -5,7 +5,7 @@ var ADD_FORM = 'Home/GetAddForm';
 
 $(function () {
     var service = new Service();
-    var screen = new Window($('#basicModal'), '#modalBody');
+    var screen = new Window($('#basicModal'), '#modalBody', '#myModalLabel');
     var navigateManager = new NavigateManager(screen, service);
 
     var model = new UserViewModel(navigateManager, service);
