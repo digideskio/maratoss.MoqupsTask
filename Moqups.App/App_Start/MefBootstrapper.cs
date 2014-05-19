@@ -11,6 +11,7 @@ namespace Moqups.App.App_Start
 
         public MefBootstrapper()
         {
+            AppDomain.CurrentDomain.SetData("DataDirectory", AppDomain.CurrentDomain.BaseDirectory);
             _container = new CompositionContainer(GetCatalog());
         }
 
