@@ -45,7 +45,7 @@
         return statuses;
     };
 
-    self.addUser = function (user, callback, errorCallback, finnaly) {
+    self.SaveOrUpdateUser = function (user, callback, errorCallback, finnaly) {
         var copyUser = createUserFrom(user);
         copyUser.Status = copyUser.Status().Id;
         $.ajax({
@@ -53,7 +53,10 @@
             url: 'api/users',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
-            success: callback,
+            success: function (data) {
+                data.Status = statusConverter.GetStatusById(data.Status);
+                callback(data);
+            },
             error: errorCallback,
             complete: finnaly,
             data: ko.toJSON(copyUser)

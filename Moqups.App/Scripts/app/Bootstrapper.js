@@ -1,4 +1,5 @@
 ﻿var USER_WAS_ADDED = 'USER_WAS_ADDED';
+var USER_WAS_MODIFY = 'USER_WAS_MODIFY';
 var USER_WAS_DELETED = 'USER_WAS_DELETED';
 var GLOBAL_CHANNEL = 'GLOBAL_CHANNEL';
 var USER_TOPIC = 'USER_TOPIC';
@@ -16,7 +17,7 @@ var StatusConvert = function () {
         return dict;
     };
 
-    self.GetStatuseById = function (id) {
+    self.GetStatusById = function (id) {
         for (var i = 0; i < dict.length; i++) {
             var item = dict[i];
             if (item.Id === id) {

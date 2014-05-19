@@ -10,7 +10,7 @@
         var editUserViewModel = new EditUserViewModel(createUserFrom(user), service, navigateManager);
         navigateManager.OpenInNewWindow(ADD_FORM, editUserViewModel, "Edit user");
     };
-    
+
     postal.subscribe({
         topic: USER_WAS_ADDED,
         callback: function (data) {
@@ -24,18 +24,43 @@
             self.Users.push(user);
         }
     });
-    
+
     postal.subscribe({
-        topic: USER_WAS_DELETED,
-        callback: function (deletedUser) {
-            var arrUser = self.Users();
-            for (var i = 0; i < arrUser.length; i++) {
-                if (arrUser[i].Id === deletedUser.Id) {
-                    self.Users.splice(i, 1);
-                }
+        topic: USER_WAS_MODIFY,
+        callback: function (data) {
+            var index = indexOfUser(data);
+            if (index > -1) {
+                var modifyUser = self.Users()[index];
+                modifyUser.Id = data.Id;
+                modifyUser.Firstname(data.Firstname);
+                modifyUser.Lastname(data.Lastname);
+                modifyUser.IsAdmin(data.IsAdmin);
+                modifyUser.Status(data.Status);
+                modifyUser.Pages(data.Pages);
             }
         }
     });
+
+    postal.subscribe({
+        topic: USER_WAS_DELETED,
+        callback: function (deletedUser) {
+            var index = indexOfUser(deletedUser);
+            if (index > -1) {
+                self.Users.splice(index, 1);
+            }
+        }
+    });
+
+    var indexOfUser = function (userItem) {
+        var arrUser = self.Users();
+        for (var i = 0; i < arrUser.length; i++) {
+            if (arrUser[i].Id === userItem.Id) {
+                return i;
+            }
+        }
+
+        return -1;
+    };
 };
 
 var EditUserViewModel = function (user, service, navigationManager) {
@@ -45,11 +70,9 @@ var EditUserViewModel = function (user, service, navigationManager) {
     self.User = ko.observable(user);
     self.AvaiablePages = ko.observableArray(exceptPage(service.getPages(), user.Pages()));
     self.AvaiableStatuses = ko.observableArray(statusConverter.GetStatuses());
-    self.AddUserCommand = function () {
+    self.SaveUserCommand = function () {
         self.IsBusy(true);
-        var copyUser = createUserFrom(self.User());
-        copyUser.Status = copyUser.Status().Id;
-        service.addUser(copyUser, addedIsSuccessful, onError, addComplete);
+        service.SaveOrUpdateUser(self.User(), addedIsSuccessful, onError, addComplete);
     };
     self.CancelCommand = function () {
         navigationManager.GoBack();
@@ -58,7 +81,7 @@ var EditUserViewModel = function (user, service, navigationManager) {
         if (!confirm("Are you sure?")) {
             return;
         }
-        
+
         self.IsBusy(true);
         service.DeleteUser(self.User(), function () {
             postal.publish({
@@ -73,7 +96,7 @@ var EditUserViewModel = function (user, service, navigationManager) {
 
     var addedIsSuccessful = function (addedUser) {
         postal.publish({
-            topic: USER_WAS_ADDED,
+            topic: self.User().isCreated ? USER_WAS_MODIFY : USER_WAS_ADDED,
             data: addedUser
         });
         navigationManager.GoBack();

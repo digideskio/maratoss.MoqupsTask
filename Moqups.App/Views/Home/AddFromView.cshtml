@@ -33,7 +33,7 @@
         <p style="cursor: move" data-bind="text: $data.Name, dragZone: { name: 'target' }"></p>
     </div>
 
-    <button class="btn btn-default" data-bind="click: AddUserCommand">Save</button>
+    <button class="btn btn-default" data-bind="click: SaveUserCommand">Save</button>
     <button class="btn btn-default" data-dismiss="modal" data-bind="click: CancelCommand">Cancel</button>
     <button class="btn btn-default" data-bind="click: RemoveUserCommand, visible: User().Id > 0">Delete</button>
 </form>

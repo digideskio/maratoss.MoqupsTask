@@ -23,7 +23,7 @@ namespace Moqups.App.Controllers
             _userService = userService;
         }
 
-        public HttpResponseMessage Add(User user)
+        public HttpResponseMessage SaveOrUpdate(User user)
         {
             User newUser = _userService.SaveOrUpdate(user);
             var response = Request.CreateResponse(HttpStatusCode.Created, newUser);

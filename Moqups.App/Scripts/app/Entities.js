@@ -25,6 +25,10 @@ User.prototype.toString = function() {
     return this.Firstname() + " " + this.Lastname();
 };
 
+User.prototype.isCreated = function () {
+    return this.Id > 0;
+};
+
 var Page = function (id, name) {
     var self = this;
 

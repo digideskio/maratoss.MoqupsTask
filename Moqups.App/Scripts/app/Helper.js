@@ -8,7 +8,7 @@ function InitModel(userViewModel, service) {
     service.getAllUsers(null, function (data) {
         for (var i = 0; i < data.length; i++) {
             var item = data[i];
-            item.Status = statusConverter.GetStatuseById(item.Status);
+            item.Status = statusConverter.GetStatusById(item.Status);
 
             var user = new User();
             user.Id = item.Id;
@@ -90,11 +90,3 @@ function indexPageOf(arr, page) {
 
     return -1;
 }
-
-var getStatusById = function (dict, id) {
-    for (var i = 0; i < dict.length; i++) {
-        if (dict[i].Id === id) {
-            return dict[i];
-        }
-    }
-};
