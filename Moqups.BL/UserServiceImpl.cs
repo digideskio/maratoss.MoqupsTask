@@ -48,7 +48,7 @@ namespace Moqups.BL
                 repository.Update(user);
             }
             else {
-                repository.Insert(user);
+                user.Id = (long)repository.Insert(user);
             }
 
             return user;

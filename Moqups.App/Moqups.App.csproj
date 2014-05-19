@@ -258,9 +258,10 @@
     <Content Include="Content\Site.css" />
     <None Include="Views\Home\IndexSPA.cshtml" />
     <Content Include="Scripts\app\Bootstrapper.js" />
+    <Content Include="Scripts\app\EditUserViewModel.js" />
     <Content Include="Scripts\app\Entities.js" />
     <Content Include="Scripts\app\Helper.js" />
-    <Content Include="Scripts\app\Model.js" />
+    <Content Include="Scripts\app\UserViewModel.js" />
     <Content Include="Scripts\app\NavigationManager.js" />
     <Content Include="Scripts\app\Service.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
