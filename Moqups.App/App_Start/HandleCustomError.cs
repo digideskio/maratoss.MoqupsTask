@@ -16,7 +16,8 @@ namespace Moqups.App.App_Start
         public override void OnException(ExceptionContext filterContext)
         {
             //If the exeption is already handled we do nothing
-            if (filterContext.ExceptionHandled) {
+            if (filterContext.ExceptionHandled)
+            {
                 return;
             }
 
@@ -29,9 +30,9 @@ namespace Moqups.App.App_Start
             IExceptionHandler handler = _exceptionHandlerFactory.Get(filterContext.Exception.GetType());
             ActionResult actionResult =
                 handler.Handle(new HandleErrorInfo(filterContext.Exception, controllerType.FullName, actionName),
-                    returnType == typeof (JsonResult));
+                    returnType == typeof(JsonResult));
 
-            filterContext.Result = actionResult ?? new ViewResult{ViewName = "Error"};
+            filterContext.Result = actionResult ?? new ViewResult { ViewName = "Error" };
             filterContext.ExceptionHandled = true;
         }
     }

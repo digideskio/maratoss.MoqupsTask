@@ -257,7 +257,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <None Include="Views\Home\IndexSPA.cshtml" />
+    <None Include="Properties\PublishProfiles\myAspnet.pubxml" />
     <Content Include="Scripts\app\Bootstrapper.js" />
     <Content Include="Scripts\app\EditUserViewModel.js" />
     <Content Include="Scripts\app\Entities.js" />
@@ -344,6 +344,7 @@
     <Content Include="Views\Shared\NoPageFound.cshtml" />
     <Content Include="Views\Shared\CustomError.cshtml" />
     <Content Include="Views\Home\AddFromView.cshtml" />
+    <Content Include="Views\Home\IndexSPA.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
