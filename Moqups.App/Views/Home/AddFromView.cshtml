@@ -31,10 +31,10 @@
         <div class="form-group">
             <select class="form-control" 
                     data-bind="options: $root.AvaiableStatuses,
-                           selectedOptions: Status,
-                           optionText: 'Value',
-                           optionValue: 'Id',
-                           value: Status">
+                               selectedOptions: Status,
+                               optionText: 'Value',
+                               optionValue: 'Id',
+                               value: Status">
             </select>
         </div>
     </div>
@@ -44,7 +44,7 @@
         Pages:
         <div data-bind="foreach: User().Pages, dropZone: { accepts: 'target', drop: function (data, model) { dropSource(data, model); } }"
              style="border: gray solid 1px; padding: 5px; min-height: 100px;">
-            <p style="cursor: move" data-bind="text: $data.Name, dragZone: { name: 'source' }"></p>
+            <p style="cursor: move; padding: 5px; background: lightskyblue;" data-bind="text: $data.Name, dragZone: { name: 'source' }"></p>
         </div>
     </div>
     
@@ -52,7 +52,7 @@
         Available pages:
         <div data-bind="foreach: AvaiablePages, dropZone: { accepts: 'source', drop: function (data, model) { dropTarget(data, model); } }" 
              style="border: gray solid 1px; padding: 5px; min-height: 100px;">
-            <p style="cursor: move" data-bind="text: $data.Name, dragZone: { name: 'target' }"></p>
+            <p style="cursor: move; padding: 5px; background: lightskyblue;" data-bind="text: $data.Name, dragZone: { name: 'target' }"></p>
         </div>
     </div>
     

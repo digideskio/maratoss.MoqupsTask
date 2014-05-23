@@ -32,34 +32,35 @@
             </div>
             <div id="modalBody" class="modal-body">
             </div>
-
         </div>
     </div>
 </div>
 
-<button data-bind="click: GoToAddUserCommand" class="btn btn-primary">Add</button>
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Status</th>
-            <th>Is admin</th>
-            <th>Pages</th>
-        </tr>
-    </thead>
-    <tbody data-bind="foreach: Users">
-        <tr style="cursor: pointer;" data-bind="event: { dblclick: $root.GoToEditUserCommand }">
-            <td><span data-bind="text: Firstname" /></td>
-            <td><span data-bind="text: Lastname" /></td>
-            <td><span data-bind="text: Status" /></td>
-            <td>
-                <input type="checkbox" data-bind="checked: IsAdmin" disabled="disabled" /></td>
-            <td>
-                <!-- ko foreach: Pages -->
-                <span data-bind="text: $data.Name"></span>
-                <!-- /ko -->
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div id="container">
+    <button data-bind="click: GoToAddUserCommand" class="btn btn-primary">Add</button>
+    <table class="table table-striped table-hover" style="max-width: 640px;">
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Status</th>
+                <th>Is admin</th>
+                <th>Pages</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: Users">
+            <tr style="cursor: pointer;" data-bind="event: { dblclick: $root.GoToEditUserCommand }">
+                <td><span data-bind="text: Firstname" /></td>
+                <td><span data-bind="text: Lastname" /></td>
+                <td><span data-bind="text: Status" /></td>
+                <td>
+                    <input type="checkbox" data-bind="checked: IsAdmin" disabled="disabled" /></td>
+                <td>
+                    <!-- ko foreach: Pages -->
+                    <span data-bind="text: $data.Name"></span>
+                    <!-- /ko -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
