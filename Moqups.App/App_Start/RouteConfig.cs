@@ -7,7 +7,8 @@ namespace Moqups.App
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("Templates/{filename}.html");
+            routes.IgnoreRoute("{resource}.html/{*pathInfo}");
 
             routes.MapRoute(
                 name: "Default",

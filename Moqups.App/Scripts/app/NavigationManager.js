@@ -5,7 +5,7 @@ var NavigateManager = function (screen, viewFactory) {
     var self = this;
     self.OpenInNewWindow = function (url, viewModel, title, contract) {
         unbind();
-        //todo: resolve view and bind to viewmodel
+        // todo: resolve view and bind to viewmodel
         var view = resolveView(url, contract);
         if (view === null) {
             throw "view not found";

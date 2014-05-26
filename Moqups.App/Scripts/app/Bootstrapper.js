@@ -1,7 +1,11 @@
 ﻿var USER_WAS_ADDED = 'USER_WAS_ADDED';
 var USER_WAS_MODIFY = 'USER_WAS_MODIFY';
 var USER_WAS_DELETED = 'USER_WAS_DELETED';
-var ADD_FORM = 'Home/GetAddForm';
+var ADD_FORM = 'Templates/AddForm.html';
+
+$.ajaxPrefilter('script', function (options) {
+    options.cache = true;
+});
 
 var StatusConvert = function () {
     var self = this;
@@ -27,15 +31,9 @@ var StatusConvert = function () {
     };
 };
 
-//var tooltipService = new TooltipService();
 var statusConverter = new StatusConvert();
 
 $(function () {
-    //tooltipService.Register('User.Firstname', 'enter firstname for add', 'ADD');
-    //tooltipService.Register('User.Firstname', 'enter firstname for edit', 'EDIT');
-    //tooltipService.Register('User.Lastname', 'enter Lastname for add', 'ADD');
-    //tooltipService.Register('User.Lastname', 'enter Lastname for edit', 'EDIT');
-
     var service = new Service();
     statusConverter.SetStatuses(service.getStatuses());
 

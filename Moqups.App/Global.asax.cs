@@ -27,11 +27,8 @@ namespace Moqups.App
 
             ControllerBuilder.Current.SetControllerFactory(new MefControllerFactory(bootsrapper.Container));
 
-            var dependencyResolver = System.Web.Http.GlobalConfiguration.Configuration.DependencyResolver;
-            System.Web.Http.GlobalConfiguration.Configuration.DependencyResolver = new MefDependencyResolver(bootsrapper.Container);
-
-//            ControllerBuilder.Current.SetControllerFactory(new MefControllerFactory(bootsrapper.Container));
-//            DependencyResolver.SetResolver(new MefDependencyResolver(bootsrapper.Container));
+            var dependencyResolver = GlobalConfiguration.Configuration.DependencyResolver;
+            GlobalConfiguration.Configuration.DependencyResolver = new MefDependencyResolver(bootsrapper.Container);
 
             AreaRegistration.RegisterAllAreas();
             RegisterTooltip.Register();
@@ -40,6 +37,8 @@ namespace Moqups.App
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters,
                 bootsrapper.Container.GetExportedValue<IExceptionHandlerFactory>());
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            BundleTable.EnableOptimizations = true;
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 

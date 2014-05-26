@@ -19,10 +19,25 @@ namespace Moqups.App
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
-
+            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include("~/Scripts/modernizr-*"));
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/app").Include("~/Scripts/app/*.js"));
+            bundles.Add(new ScriptBundle("~/bundles/commonJs").Include(
+                "~/Scripts/sammy-0.7.4.js",
+                "~/Scripts/knockout-3.1.0.js",
+                "~/Scripts/bootstrap.min.js",
+                "~/Scripts/bootstrap-modal.js",
+                "~/Scripts/bootstrap-transition.js",
+                "~/Scripts/lodash.min.js",
+                "~/Scripts/postal.js",
+                "~/Scripts/knockout.dragdrop.js"));
+            bundles.Add(new StyleBundle("~/bundles/bootstrapCss").Include(
+                "~/Content/bootstrap.css",
+                "~/Content/bootstrap-theme.min.css",
+                "~/Content/bootstrap-responsive.css"));
+
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

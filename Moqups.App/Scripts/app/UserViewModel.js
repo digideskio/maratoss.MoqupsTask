@@ -3,6 +3,7 @@
 
     self.IsBusy = ko.observable(false);
     self.Users = ko.observableArray();
+    
     self.GoToAddUserCommand = function () {
         var editUserViewModel = new EditUserViewModel(new User(), service, navigateManager);
         navigateManager.OpenInNewWindow(ADD_FORM, editUserViewModel, "ADD USER");

@@ -68,16 +68,17 @@ var Service = function () {
     self.loadForm = function (url) {
         var view;
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: url,
             error: function (data) {
-                //screen.html(data.responseText);
                 alert(data.responseText);
             },
             success: function (data) {
                 view = data;
             },
-            async: false
+            async: false,
+            dataType: 'html',
+            cache: false
         });
 
         return view;

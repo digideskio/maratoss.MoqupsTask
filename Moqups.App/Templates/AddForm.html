@@ -1,0 +1,61 @@
+﻿<!--ViewModel: EditUserViewModel -->
+
+<script type="text/javascript" src="/Scripts/bootstrap-select.js" data-cache="true"></script>
+<link rel="stylesheet" type="text/css" href="/Content/bootstrap-select.css">
+<link rel="stylesheet" type="text/css" href="/Content/app.css">
+
+<div id="foreground" data-bind="visible: IsBusy">
+    <div class="loading">
+        loading...
+    </div>
+</div>
+
+<form class="form-horizontal">
+    <div data-bind="with: User">
+        <div class="form-group">
+            <label>Firstname</label>
+            <input type="email" class="form-control" data-bind="value: Firstname">
+        </div>
+        <div class="form-group">
+            <label>Lastname</label>
+            <input type="text" class="form-control" data-bind="value: Lastname">
+        </div>
+        <div class="form-group">
+            <input type="checkbox" data-bind="checked: IsAdmin" />
+            <label>Is admin</label>
+        </div>
+        <div class="form-group">
+            <select class="form-control" 
+                    data-bind="options: $root.AvaiableStatuses,
+                               selectedOptions: Status,
+                               optionText: 'Value',
+                               optionValue: 'Id',
+                               value: Status">
+            </select>
+        </div>
+    </div>
+    
+    <div>
+        <div class="form-group">
+            Pages:
+            <div data-bind="foreach: User().Pages, dropZone: { accepts: 'target', drop: function (data, model) { dropSource(data, model); } }"
+                    style="border: gray solid 1px; padding: 5px; min-height: 150px;">
+                <p class="page" data-bind="text: $data.Name, dragZone: { name: 'source' }" ></p>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            Available pages:
+            <div data-bind="foreach: AvaiablePages, dropZone: { accepts: 'source', drop: function (data, model) { dropTarget(data, model); } }" 
+                    style="border: gray solid 1px; padding: 5px; min-height: 150px;">
+                <p class="page" data-bind="text: $data.Name, dragZone: { name: 'target' }"></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <button class="btn btn-success" data-bind="click: SaveUserCommand">Save</button>
+        <button class="btn btn-info" data-dismiss="modal" data-bind="click: CancelCommand">Cancel</button>
+        <button class="btn btn-danger" data-bind="click: RemoveUserCommand, visible: User().isCreated()">Delete</button>
+    </div>
+</form>
