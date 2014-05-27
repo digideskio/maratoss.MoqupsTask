@@ -36,24 +36,23 @@
     </div>
     
     <div>
-        <div class="form-group">
+        <div style="float: left; width: 49%;">
             Pages:
             <div data-bind="foreach: User().Pages, dropZone: { accepts: 'target', drop: function (data, model) { dropSource(data, model); } }"
-                    style="border: gray solid 1px; padding: 5px; min-height: 150px;">
+                 style="border: gray solid 1px; padding: 5px; min-height: 140px;">
                 <p class="page" data-bind="text: $data.Name, dragZone: { name: 'source' }" ></p>
             </div>
         </div>
-    
-        <div class="form-group">
+        <div style="width: 49%; float: right;">
             Available pages:
             <div data-bind="foreach: AvaiablePages, dropZone: { accepts: 'source', drop: function (data, model) { dropTarget(data, model); } }" 
-                    style="border: gray solid 1px; padding: 5px; min-height: 150px;">
+                 style="border: gray solid 1px; padding: 5px; min-height: 140px;">
                 <p class="page" data-bind="text: $data.Name, dragZone: { name: 'target' }"></p>
             </div>
         </div>
     </div>
     
-    <div class="form-group">
+    <div style="text-align: right;">
         <button class="btn btn-success" data-bind="click: SaveUserCommand">Save</button>
         <button class="btn btn-info" data-dismiss="modal" data-bind="click: CancelCommand">Cancel</button>
         <button class="btn btn-danger" data-bind="click: RemoveUserCommand, visible: User().isCreated()">Delete</button>
