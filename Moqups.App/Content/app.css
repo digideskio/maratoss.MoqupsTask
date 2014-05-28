@@ -2,4 +2,5 @@
     cursor: move;
     padding: 5px;
     background: lightskyblue;
+    border: 1px solid blue;
 }

@@ -61,9 +61,11 @@
         </div>
     </div>
     
-    <div style="text-align: right;">
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2" style="text-align: right; margin-top: 5px;">
         <button class="btn btn-success" data-bind="click: SaveUserCommand">Save</button>
         <button class="btn btn-info" data-dismiss="modal" data-bind="click: CancelCommand">Cancel</button>
         <button class="btn btn-danger" data-bind="click: RemoveUserCommand, visible: User().isCreated()">Delete</button>
+      </div>
     </div>
 </form>
