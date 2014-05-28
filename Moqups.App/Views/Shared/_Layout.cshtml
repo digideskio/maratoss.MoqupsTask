@@ -4,15 +4,28 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-@*    @Scripts.Render("~/bundles/modernizr")*@
+    <style>
+        .popup {
+            position: fixed;
+            left: 50%;
+        }
+
+        .popup .wrapper {
+            position: relative;
+            left: -50%;
+        }
+    </style>
+    @*    @Scripts.Render("~/bundles/modernizr")*@
     @Scripts.Render("~/bundles/jquery")
     @Styles.Render("~/bundles/bootstrapCss")
 
     @RenderSection("head", false)
 </head>
-<body style="padding: 10px;">
-    @RenderBody()
+<body class="popup">
+    <div class="wrapper">
+        @RenderBody()
 
-    @RenderSection("scripts", required: false)
+        @RenderSection("scripts", required: false)
+    </div>
 </body>
 </html>
