@@ -263,6 +263,10 @@
     <Content Include="Scripts\app\EditUserViewModel.js" />
     <Content Include="Scripts\app\Entities.js" />
     <Content Include="Scripts\app\Helper.js" />
+    <TypeScriptCompile Include="Scripts\app\ts\EditUserViewModel.ts" />
+    <TypeScriptCompile Include="Scripts\app\ts\Boot.ts" />
+    <Content Include="Scripts\app\ts\Boot.js" />
+    <Content Include="Scripts\app\ts\EditUserViewModel.js" />
     <Content Include="Scripts\app\UserViewModel.js" />
     <Content Include="Scripts\app\NavigationManager.js" />
     <Content Include="Scripts\app\Service.js" />
@@ -292,7 +296,13 @@
     <Content Include="Scripts\postal.min.js" />
     <Content Include="Scripts\sammy-0.7.4.js" />
     <Content Include="Scripts\sammy-0.7.4.min.js" />
+    <Content Include="Scripts\typings\bootstrap\bootstrap.d.ts" />
+    <Content Include="Scripts\typings\jquery\jquery.d.ts" />
+    <Content Include="Scripts\typings\knockout.mapper\knockout.mapper.d.ts" />
+    <Content Include="Scripts\typings\knockout.mapping\knockout.mapping.d.ts" />
+    <Content Include="Scripts\typings\knockout\knockout.d.ts" />
     <Content Include="Templates\AddForm.html" />
+    <Content Include="TypeScriptTest.html" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -401,4 +411,7 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
+  <Target Name="BeforeBuild">
+    <Exec Command="&quot;$(PROGRAMFILES)\Microsoft SDKs\TypeScript\1.0\tsc&quot; @(TypeScriptCompile ->'&quot;%(fullpath)&quot;', ' ')" />
+  </Target>
 </Project>

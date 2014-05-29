@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <style>
+        .popup {
+            position: fixed;
+            left: 50%;
+        }
+
+        .popup .wrapper {
+            position: relative;
+            left: -50%;
+        }
+    </style>
+    <script src="/Scripts/jquery-1.9.1.js"></script>
+    <script src="/Scripts/knockout-3.1.0.js"></script>
+    <script src="/Scripts/app/ts/EditUserViewModel.js"></script>
+    <script src="/Scripts/app/ts/Boot.js"></script>
+</head>
+<body class="popup">
+    <div class="wrapper">
+        <span data-bind="text: getFirstname()"></span>
+        <span data-bind="text: getLastname()"></span>
+    </div>
+</body>
+</html>
