@@ -25,13 +25,13 @@ namespace Moqups.App
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include("~/Scripts/app/*.js"));
             bundles.Add(new ScriptBundle("~/bundles/commonJs").Include(
-                "~/Scripts/sammy-0.7.4.js",
+                "~/Scripts/sammy-0.7.4.min.js",
                 "~/Scripts/knockout-3.1.0.js",
                 "~/Scripts/bootstrap.min.js",
                 "~/Scripts/bootstrap-modal.js",
                 "~/Scripts/bootstrap-transition.js",
                 "~/Scripts/lodash.min.js",
-                "~/Scripts/postal.js",
+                "~/Scripts/postal.min.js",
                 "~/Scripts/knockout.dragdrop.js"));
             bundles.Add(new StyleBundle("~/bundles/bootstrapCss").Include(
                 "~/Content/bootstrap.css",
