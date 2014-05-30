@@ -1,5 +1,5 @@
 ﻿module App {
-    interface IViewFactory {
+    export interface IViewFactory {
         LoadForm(url: string): string;
     }
 }

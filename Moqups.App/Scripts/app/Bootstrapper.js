@@ -1,9 +1,4 @@
-﻿var USER_WAS_ADDED = 'USER_WAS_ADDED';
-var USER_WAS_MODIFY = 'USER_WAS_MODIFY';
-var USER_WAS_DELETED = 'USER_WAS_DELETED';
-var ADD_FORM = 'Templates/AddForm.html';
-
-$.ajaxPrefilter('script', function (options) {
+﻿$.ajaxPrefilter('script', function (options) {
     options.cache = true;
 });
 

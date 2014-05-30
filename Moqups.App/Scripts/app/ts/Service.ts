@@ -1,5 +1,5 @@
 ﻿module App {
-    class Service implements IViewFactory {
+    export class Service implements IViewFactory {
         public GetAllUsers(
             filter: string,
             callback: (data: string) => any,

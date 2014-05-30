@@ -95,4 +95,5 @@
         };
         return Service;
     })();
+    App.Service = Service;
 })(App || (App = {}));
