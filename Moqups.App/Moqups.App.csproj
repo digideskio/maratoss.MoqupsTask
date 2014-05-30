@@ -267,6 +267,11 @@
     <TypeScriptCompile Include="Scripts\app\ts\Boot.ts" />
     <Content Include="Scripts\app\ts\Boot.js" />
     <Content Include="Scripts\app\ts\EditUserViewModel.js" />
+    <TypeScriptCompile Include="Scripts\app\ts\Service.ts" />
+    <TypeScriptCompile Include="Scripts\app\ts\Entities.ts" />
+    <TypeScriptCompile Include="Scripts\app\ts\NavigationManager.ts" />
+    <TypeScriptCompile Include="Scripts\app\ts\HostScreen.ts" />
+    <TypeScriptCompile Include="Scripts\app\ts\IViewFactory.ts" />
     <Content Include="Scripts\app\UserViewModel.js" />
     <Content Include="Scripts\app\NavigationManager.js" />
     <Content Include="Scripts\app\Service.js" />
