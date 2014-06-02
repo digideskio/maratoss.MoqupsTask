@@ -23,8 +23,8 @@ namespace Moqups.App
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
 
-            bundles.Add(new ScriptBundle("~/bundles/app").Include("~/Scripts/app/*.js"));
-            bundles.Add(new ScriptBundle("~/bundles/commonJs").Include(
+            bundles.Add(new ScriptBundle("~/bundles/app").Include("~/Scripts/app/ts/*.js"));
+            bundles.Add(new ScriptBundle("~/bundles/frameworks").Include(
                 "~/Scripts/sammy-0.7.4.min.js",
                 "~/Scripts/knockout-3.1.0.js",
                 "~/Scripts/bootstrap.min.js",

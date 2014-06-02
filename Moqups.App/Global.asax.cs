@@ -38,7 +38,7 @@ namespace Moqups.App
                 bootsrapper.Container.GetExportedValue<IExceptionHandlerFactory>());
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            BundleTable.EnableOptimizations = true;
+            //BundleTable.EnableOptimizations = false;
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 

@@ -1,5 +1,9 @@
 ﻿///<reference path="../../typings/jquery/jquery.d.ts" />
-///<reference path="../..//typings/knockout/knockout.d.ts" />
+///<reference path="../../typings/knockout/knockout.d.ts" />
+///<reference path="../../typings/postal.d.ts" />
+///<reference path="Service.ts" />
+///<reference path="Entities.ts" />
+///<reference path="Envirotment.ts" />
 
 module App {
     export class EditUserViewModel {
@@ -34,23 +38,17 @@ module App {
             }
 
             this.IsBusy(true);
-            this._service.DeleteUser(this.User(), function() {
-                postal.publish({
-                    topic: Envirotment.USER_WAS_DELETED,
-                    data: self.User()
-                });
-                navigationManager.GoBack();
-            }, onError, () => {
-                self.IsBusy(false);
+            this._service.DeleteUser(this.User(), () => {
+                postal.publish(Envirotment.USER_WAS_DELETED, this.User());
+                this._navigationManager.GoBack();
+            }, this.onError, () => {
+                this.IsBusy(false);
             });
         }
 
         private saveOrUpdateIsSuccessful(userData) {
             var topic = this.User().isCreated() ? Envirotment.USER_WAS_MODIFY : Envirotment.USER_WAS_ADDED;
-            postal.publish({
-                topic: topic,
-                data: userData
-            });
+            postal.publish(topic, userData);
             this._navigationManager.GoBack();
         }
 

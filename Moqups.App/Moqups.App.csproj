@@ -265,13 +265,14 @@
     <Content Include="Scripts\app\Helper.js" />
     <TypeScriptCompile Include="Scripts\app\ts\EditUserViewModel.ts" />
     <TypeScriptCompile Include="Scripts\app\ts\Boot.ts" />
-    <Content Include="Scripts\app\ts\Boot.js" />
-    <Content Include="Scripts\app\ts\EditUserViewModel.js" />
     <TypeScriptCompile Include="Scripts\app\ts\Service.ts" />
     <TypeScriptCompile Include="Scripts\app\ts\Entities.ts" />
     <TypeScriptCompile Include="Scripts\app\ts\NavigationManager.ts" />
     <TypeScriptCompile Include="Scripts\app\ts\HostScreen.ts" />
     <TypeScriptCompile Include="Scripts\app\ts\IViewFactory.ts" />
+    <TypeScriptCompile Include="Scripts\app\ts\IViewModel.ts" />
+    <TypeScriptCompile Include="Scripts\app\ts\Envirotment.ts" />
+    <TypeScriptCompile Include="Scripts\app\ts\UserViewModel.ts" />
     <Content Include="Scripts\app\UserViewModel.js" />
     <Content Include="Scripts\app\NavigationManager.js" />
     <Content Include="Scripts\app\Service.js" />
@@ -306,6 +307,7 @@
     <Content Include="Scripts\typings\knockout.mapper\knockout.mapper.d.ts" />
     <Content Include="Scripts\typings\knockout.mapping\knockout.mapping.d.ts" />
     <Content Include="Scripts\typings\knockout\knockout.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\postal.d.ts" />
     <Content Include="Templates\AddForm.html" />
     <Content Include="TypeScriptTest.html" />
     <Content Include="x64\SQLite.Interop.dll">

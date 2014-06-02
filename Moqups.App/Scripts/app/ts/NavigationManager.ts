@@ -1,4 +1,8 @@
-﻿module App {
+﻿///<reference path="IViewFactory.ts" />
+///<reference path="IViewModel.ts" />
+///<reference path="HostScreen.ts" />
+
+module App {
     export class NavigationManager {
         private _currentViewModel: IViewModel;
         private _screen: HostScreen;

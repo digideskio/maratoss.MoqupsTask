@@ -26,7 +26,7 @@ function fillFakeData(model) {
         user.Pages.push(new Page(2, 'Page2'));
         model.Users.push(user);
 
-        if (i % 2 == 0) {
+        if (i % 2 === 0) {
             user.IsAdmin(true);
             user.Status(new Status(0, "Married"));
             user.Pages.push(new Page(3, 'Page3'));

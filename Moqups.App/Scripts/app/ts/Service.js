@@ -9,7 +9,20 @@
                 url: "api/users",
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
-                success: callback,
+                success: function (data) {
+                    var users = new Array();
+                    $.each(data, function (key, item) {
+                        var user = new App.User();
+                        user.Id = item.Id;
+                        user.Firstname(item.Firstname);
+                        user.Lastname(item.Lastname);
+                        user.IsAdmin(item.IsAdmin);
+                        user.Pages(item.Pages);
+                        user.Status(item.Status);
+                        users.push(user);
+                    });
+                    callback(users);
+                },
                 error: errorCallback,
                 complete: finnaly
             });
@@ -25,7 +38,7 @@
                 success: function (data) {
                     var pages = new Array();
                     $.each(data, function (key, item) {
-                        pages.push(new Page(item.Id, item.Name));
+                        pages.push(new App.Page(item.Id, item.Name));
                     });
                     callback(pages);
                 }
@@ -83,7 +96,7 @@
         };
 
         Service.prototype.createUserFrom = function (user) {
-            var newUser = new User();
+            var newUser = new App.User();
             newUser.Id = user.Id;
             newUser.Firstname = ko.observable(user.Firstname());
             newUser.Lastname = ko.observable(user.Lastname());

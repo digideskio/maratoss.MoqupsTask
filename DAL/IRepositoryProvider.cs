@@ -17,7 +17,9 @@ namespace DAL
     public class RepositoryProvider : IRepositoryProvider
     {
         [ImportMany]
+#pragma warning disable 649
         private Lazy<IRepositoryCreator, IRepositoryCreatorMetadata>[] _repositoryCreators;
+#pragma warning restore 649
 
         public IEnumerable<Tuple<Type, Func<ISession, IRepository>>> GetRepositories()
         {

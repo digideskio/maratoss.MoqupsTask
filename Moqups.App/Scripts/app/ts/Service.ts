@@ -2,24 +2,37 @@
     export class Service implements IViewFactory {
         public GetAllUsers(
             filter: string,
-            callback: (data: string) => any,
-            errorCallback: (error: JQueryXHR) => any,
-            finnaly: () => any) {
+            callback: (data: Array<User>) => void,
+            errorCallback?: (error: JQueryXHR) => void,
+            finnaly?: () => void) {
             $.ajax({
                 type: "GET",
                 url: "api/users",
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
-                success: callback,
+                success: data => {
+                    var users = new Array<User>();
+                    $.each(data, (key, item) => {
+                        var user = new User();
+                        user.Id = item.Id;
+                        user.Firstname(item.Firstname);
+                        user.Lastname(item.Lastname);
+                        user.IsAdmin(item.IsAdmin);
+                        user.Pages(item.Pages);
+                        user.Status(item.Status);
+                        users.push(user);
+                    });
+                    callback(users);
+                },
                 error: errorCallback,
                 complete: finnaly
             });
         }
 
         public GetPages(
-            callback: (data: Array<Page>) => any,
-            errorCallback: (error: JQueryXHR) => any,
-            finnaly: () => any) {
+            callback: (data: Array<Page>) => void,
+            errorCallback: (error: JQueryXHR) => void,
+            finnaly: () => void) {
             $.ajax({
                 type: 'GET',
                 url: 'api/pages',
